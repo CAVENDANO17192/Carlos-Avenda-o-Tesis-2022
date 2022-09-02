@@ -272,6 +272,9 @@ end
 
 end
 %--------------------------------------------------------------------------
+% EndNodes = [];
+% 
+% EndNodes = [ones(360,1),ones(360,1)];
 
 Eta =      [ones(size(EndNodes,1),1)];
 Datos = table(EndNodes,Weight, Eta)
