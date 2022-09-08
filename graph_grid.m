@@ -154,6 +154,22 @@ end
 end
 end
 
+% diagonales largas
+for nivel = 0:1:2
+for columna = 0:16:32
+for fila= 0:4:8
+for or = 0:1:1
+    res1 = 1 + or + fila + columna + nivel
+    res2 = 22 - or + fila + columna + nivel
+    res3 = 5 + or+ fila + columna + nivel
+    res4 = 18 - or + fila+ columna +  nivel
+    EndNodes = [EndNodes; res1, res2; res3, res4];
+    Weight=[Weight;sqrt(3);sqrt(3)];
+end
+end
+end
+end
+
  end
 
 %--------------------------------------------------------------------------

@@ -15,11 +15,11 @@ TRAYECTORIA_OPTIMA = [];
 enable    = 1;
 alpha     = 1;
 beta      = 1;
-rho       = 0;
-hormigas  = 1;
-iteraciones=1000;
+rho       = 0.5;
+hormigas  = 50;
+iteraciones=2000;
 gamma     = 1;
-Q         = 1.1;
+Q         = 1.2;
 nodoinit  =1;
 nodofinish=64;
 death=0;
@@ -202,17 +202,35 @@ TAO_SIMU=[];
 Weight_SIMU=[];
 Posiciones_SIMU=[];
 Name_SIMU=[];
+nod = 0;
 
-
-for n = 1:1:size(TRAYECTORIA_OPTIMA,1)
-    NODO = [NODO; TRAYECTORIA_OPTIMA(n,1)];
+for n = 1:1:size(TRAYECTORIA_OPTIMA,1)          % evitr poner nodos n
+    
+    if n ~= 1
+    for m = 1:1:size(NODO,1)
+        if TRAYECTORIA_OPTIMA(n,1) == NODO(m)
+            nod= 1;
+        end 
+    end 
+    end 
+    
+    if n == 1
+        NODO = [NODO; TRAYECTORIA_OPTIMA(n,1)];
+    end 
+    
+    if (nod ~= 1) & (n ~=1)
+        NODO = [NODO; TRAYECTORIA_OPTIMA(n,1)];
+    end 
+    nod = 0;
     if n == size(TRAYECTORIA_OPTIMA,1)
-        NODO = [NODO;nodofinish];
-        
+        NODO = [NODO;nodofinish];  
     end
+    
     TAO_SIMU = [TAO_SIMU; FEROMONA(NO_feromona_POS(n))];
     Weight_SIMU = [Weight_SIMU;PESO_TRAYECTORIA(n)];
 end 
+
+NODO = sort(NODO);
 %******************************************
 % ERROR CUANDO NODOS PASAN POR MAS DE UNA VEZ POR EL MISMO NODO ENTONCES
 % SIZE (NODO) > Posiciones = ERROR  SERIA DE VER COMO QUITAR NODOS DE LA
@@ -222,20 +240,31 @@ end
 
 % SE DEBE DE UTILIZAR EL TAMAÑO DE LOS NODOS PARA QUE SE PUEDAN REPETIR
 % POSICIONES
-for n = 1:1:size(NODO,1)  
+for m = 1:1:size(NODO,1)
+for n = 1:1:size(Posiciones,1) 
+    
+if NODO(m) == str2num(Posiciones.Name(n))
 Posiciones_SIMU = [Posiciones_SIMU; Posiciones.X(n), Posiciones.Y(n), Posiciones.Z(n)];
-end 
-Name_SIMU = num2str(NODO);
-Xsim=Posiciones_SIMU(:,1);
-Ysim=Posiciones_SIMU(:,2);
-Zsim=Posiciones_SIMU(:,3);
+end
 
-% DATASIMU = table(TRAYECTORIA_OPTIMA,Weight_SIMU, TAO_SIMU)
-% POS_SIMU = table(Name_SIMU,Xsim, Ysim, Zsim)
-% Gsim = graph(DATASIMU, POS_SIMU);
-% grafosimu = simplify(Gsim)
-%***************************************
-%  A = plot(grafosimu, 'XData', grafosimu.Nodes.X, 'YData', COORDS(:,2)+0.5,'ZData',COORDS(:,3)+0.5, 'NodeColor', 'r' );
+end 
+end 
+if (ANT == hormigas)
+Name_SIMU = Posiciones.Name;
+Xsim=Posiciones(:,2);
+Ysim=Posiciones(:,3);
+Zsim=Posiciones(:,4);
+EndNodes = TRAYECTORIA_OPTIMA;
+DATASIMU = table(EndNodes,Weight_SIMU, TAO_SIMU);
+POS_SIMU = table(string(Name_SIMU),Xsim, Ysim, Zsim);
+Gsim = graph(DATASIMU, POS_SIMU);                       % saca error de que EndNodes es menor que 64.
+grafosimu = simplify(Gsim);
+figure(2);
+A = plot(grafosimu, 'XData', grafosimu.Nodes.Xsim.X+0.5, 'YData', grafosimu.Nodes.Ysim.Y+0.5,'ZData',grafosimu.Nodes.Zsim.Z+0.5, 'NodeColor', 'k');
+end 
+%***************************************    % Probar cla para borrar el grafo anterior.  
+% figure(2);
+%   A = plot(grafosimu, 'XData', grafosimu.Nodes.Xsim+0.5, 'YData', grafosimu.Nodes.Ysim+0.5,'ZData',grafosimu.Nodes.Zsim+0.5, 'NodeColor', 'r' );
 % h = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k' );
  % ENDNODES SIMULACION = TRAYECTORIA_OPTIMA *
 % Weight = *
@@ -249,13 +278,12 @@ disp('optimo');
 disp(OPTIMO);
 
 figure (1);
-subplot(1,2,2);
-H = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k' );
+% subplot(1,2,2);
+H = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k');
 title('TRAYECTORIA HORMIGA');
-subplot(1,2,1);
-h = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k' );
-title('TRAYECTORIA OPTIMA');
-
+% subplot(1,2,1);
+% h = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k' );
+% title('TRAYECTORIA OPTIMA');
 
 %-------- RESETEAR VARIABLES ---------------
 PESO_TRAYECTORIA = [];
