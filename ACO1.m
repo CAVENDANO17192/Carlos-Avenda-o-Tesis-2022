@@ -15,13 +15,14 @@ TRAYECTORIA_OPTIMA = [];
 enable    = 1;
 alpha     = 1;
 beta      = 1;
-rho       = 0.5;
-hormigas  = 50;
-iteraciones=2000;
+rho       = 0.35;
+hormigas  = 250;
+iteraciones=2500;
 gamma     = 1;
-Q         = 1.2;
+Q         = 0.7;
 nodoinit  =1;
-nodofinish=64;
+nodofinish=32;
+EVAPORATE = (1-rho);
 death=0;
 %% CREAR GRAFO
 
@@ -170,13 +171,13 @@ end % --------------------------------- fin iteracion --------------------------
 %% EVAPORACION DE LA FEROMONA Y AGREGAR FEROMONA A CAMINO ELEGIDO
 Nodo_actual  =nodoinit;
 Nodo_anterior = 0;
-nodofinish=64;
-EVAPORATE = (1-rho);
+%nodofinish=60;
+
 
 if(enable == 1)
 FEROMONA = FEROMONA * EVAPORATE; % FEROMONA EVAPORADA
 for eva = 1:1:size(NO_feromona_POS,1)
-FEROMONA(NO_feromona_POS(eva)) = FEROMONA(NO_feromona_POS(eva))*Q;
+FEROMONA(NO_feromona_POS(eva)) = FEROMONA(NO_feromona_POS(eva))+Q;
 end 
 %NO_feromona_POS = [];
 
@@ -249,19 +250,7 @@ end
 
 end 
 end 
-if (ANT == hormigas)
-Name_SIMU = Posiciones.Name;
-Xsim=Posiciones(:,2);
-Ysim=Posiciones(:,3);
-Zsim=Posiciones(:,4);
-EndNodes = TRAYECTORIA_OPTIMA;
-DATASIMU = table(EndNodes,Weight_SIMU, TAO_SIMU);
-POS_SIMU = table(string(Name_SIMU),Xsim, Ysim, Zsim);
-Gsim = graph(DATASIMU, POS_SIMU);                       % saca error de que EndNodes es menor que 64.
-grafosimu = simplify(Gsim);
-figure(2);
-A = plot(grafosimu, 'XData', grafosimu.Nodes.Xsim.X+0.5, 'YData', grafosimu.Nodes.Ysim.Y+0.5,'ZData',grafosimu.Nodes.Zsim.Z+0.5, 'NodeColor', 'k');
-end 
+ 
 %***************************************    % Probar cla para borrar el grafo anterior.  
 % figure(2);
 %   A = plot(grafosimu, 'XData', grafosimu.Nodes.Xsim+0.5, 'YData', grafosimu.Nodes.Ysim+0.5,'ZData',grafosimu.Nodes.Zsim+0.5, 'NodeColor', 'r' );
@@ -274,6 +263,16 @@ end
 % A = plot(G, 'XData', COORDS(:,1)+0.5, 'YData', COORDS(:,2)+0.5,'ZData',COORDS(:,3)+0.5, 'NodeColor', 'r' );
 %-----------------------------------------------------------------------
 
+
+
+
+
+
+
+
+end
+enable = 1;
+
 disp('optimo');
 disp(OPTIMO);
 
@@ -285,18 +284,27 @@ title('TRAYECTORIA HORMIGA');
 % h = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k' );
 % title('TRAYECTORIA OPTIMA');
 
+
+if (ANT == hormigas)
+Name_SIMU = Posiciones.Name;
+Xsim=Posiciones(:,2);
+Ysim=Posiciones(:,3);
+Zsim=Posiciones(:,4);
+EndNodes = TRAYECTORIA_OPTIMA;
+DATASIMU = table(EndNodes,Weight_SIMU, TAO_SIMU);
+POS_SIMU = table(string(Name_SIMU),Xsim, Ysim, Zsim);
+Gsim = graph(DATASIMU, POS_SIMU);                       % saca error de que EndNodes es menor que 64.
+grafosimu = simplify(Gsim);
+figure(2);
+A = plot(grafosimu, 'XData', grafosimu.Nodes.Xsim.X+0.5, 'YData', grafosimu.Nodes.Ysim.Y+0.5,'ZData',grafosimu.Nodes.Zsim.Z+0.5, 'NodeColor', 'k');
+end
+
 %-------- RESETEAR VARIABLES ---------------
 PESO_TRAYECTORIA = [];
 TRAYECTORIA_HORMIGA = [];
 NO_feromona_POS = [];
 RESULTS = [];
 %-------------------------------------------
-
-
-
-
-end
-enable = 1;
 end
 % ----------------------- fin hormiga ---------------------------------
 
