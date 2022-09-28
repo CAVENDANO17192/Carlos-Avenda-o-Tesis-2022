@@ -15,23 +15,30 @@ limnegz=0;
 x = 0;
 y = 0;
 z = 0;
+%------------------------POSICION OBJETIVO---------------------------------
+XP=100;
+YP=100;
+ZP=100;
+%--------------------------------------------------------------------------
 %----------------------funcion objetivo------------------------------------
 Costo = []
-costo = 10*((x-1)^2)+20*((y-1)^2)+30*((z-1)^2);
+costo = 1*((x-XP)^2)+1*((y-YP)^2)+1*((z-ZP)^2);
 %--------------------------------------------------------------------------
-Particulas = 1000; %No particulas.
+Particulas = 5; %No particulas.
 %--------------------Factor de aceleracion--------------------------------- 
 C1 = 2;
 C2 = 2;
-Inertia = 0.9
+Inertia = 0.5;
 %--------------------------------------------------------------------------
-iteraciones = 50000000  %cantidad de iteraciones
+iteraciones = 1000;  %cantidad de iteraciones
 %------------------- Inicializamos ----------------------------------------
 % inicializar poblacion
 Poblacion = [];
 for n = 1:1:Particulas
     Poblacion = [Poblacion; randi([limnegx limposx]),randi([limnegy limposy]),randi([limnegz limposz])];
+    %Poblacion = [8,9,1;9,6,1;3,5,10;10,2,10;10,5,8]
 end 
+%Poblacion = [8,9,1;9,6,1;3,5,10;10,2,10;10,5,8]
 P = Poblacion;  % se crea la matriz de todas las posiciones
 % velocidad inicio de cada particula
 V = [];
@@ -44,7 +51,7 @@ for n = 1:1:Particulas
     x = Current_P(n,1);
     y = Current_P(n,2);
     z = Current_P(n,3);
-    Costo=[Costo; 10*((x-1)^2)+20*((y-1)^2)+30*((z-1)^2)];
+    Costo=[Costo; 1*((x-XP)^2)+1*((y-YP)^2)+1*((z-ZP)^2)];
 end 
 [Global_Best,POS_GB]=min(Costo);
 P_Best_pos =[];
@@ -68,6 +75,9 @@ vz = 0;
         vx = Inertia*V(n,1)+C1*rand()*(P_Best_pos(n,1)-Current_P(n,1))+C2*rand()*(P_Best_pos(POS_GB,1)-Current_P(n,1));
         vy = Inertia*V(n,2)+C1*rand()*(P_Best_pos(n,2)-Current_P(n,2))+C2*rand()*(P_Best_pos(POS_GB,2)-Current_P(n,2));
         vz = Inertia*V(n,3)+C1*rand()*(P_Best_pos(n,3)-Current_P(n,3))+C2*rand()*(P_Best_pos(POS_GB,3)-Current_P(n,3));
+%         vx = Inertia*V(n,1)+C1*1*(P_Best_pos(n,1)-Current_P(n,1))+C2*1*(P_Best_pos(POS_GB,1)-Current_P(n,1));
+%         vy = Inertia*V(n,2)+C1*1*(P_Best_pos(n,2)-Current_P(n,2))+C2*1*(P_Best_pos(POS_GB,2)-Current_P(n,2));
+%         vz = Inertia*V(n,3)+C1*1*(P_Best_pos(n,3)-Current_P(n,3))+C2*1*(P_Best_pos(POS_GB,3)-Current_P(n,3));
         V(n,:) = [vx,vy,vz];
     end 
 px = 0;
@@ -89,7 +99,7 @@ for n = 1:1:Particulas
     x = Current_P(n,1);
     y = Current_P(n,2);
     z = Current_P(n,3);
-    Costo=[Costo; 10*((x-1)^2)+20*((y-1)^2)+30*((z-1)^2)];
+    Costo=[Costo; 1*((x-XP)^2)+1*((y-YP)^2)+1*((z-ZP)^2)];
 end 
 [minimo_iter,POS_mi]=min(Costo);
     
@@ -114,7 +124,7 @@ for n = 1:1:Particulas
     x = Current_P(n,1);
     y = Current_P(n,2);
     z = Current_P(n,3);
-    Costo_fin=[Costo_fin; 10*((x-1)^2)+20*((y-1)^2)+30*((z-1)^2)];
+    Costo_fin=[Costo_fin; 1*((x-XP)^2)+1*((y-YP)^2)+1*((z-ZP)^2)];
 end 
 
 PROMEDIO = mean(Costo_fin);
@@ -127,7 +137,7 @@ end
     
 end 
 
-
+disp('Posicion final');
 disp(Current_P);
 
 
