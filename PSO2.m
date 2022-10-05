@@ -3,6 +3,8 @@
 clc;
 clear;
 close all;
+%% Obstaculos
+
 %% Inicializacion, definicion de parametros y de variables
 % -----------------Limites---------------------------------------------
 limposx=50;
@@ -16,9 +18,9 @@ x = 0;
 y = 0;
 z = 0;
 %------------------------POSICION OBJETIVO---------------------------------
-XP=100;
-YP=100;
-ZP=100;
+XP=15;
+YP=30;
+ZP=50;
 %--------------------------------------------------------------------------
 %----------------------funcion objetivo------------------------------------
 Costo = []
@@ -30,7 +32,7 @@ C1 = 2;
 C2 = 2;
 Inertia = 0.5;
 %--------------------------------------------------------------------------
-iteraciones = 1000;  %cantidad de iteraciones
+iteraciones = 100;  %cantidad de iteraciones
 %------------------- Inicializamos ----------------------------------------
 % inicializar poblacion
 Poblacion = [];
@@ -128,12 +130,36 @@ for n = 1:1:Particulas
 end 
 
 PROMEDIO = mean(Costo_fin);
-    
-if PROMEDIO == 0
+PROMEDIOX= mean(Current_P(:,1));
+PROMEDIOY= mean(Current_P(:,2));
+PROMEDIOZ= mean(Current_P(:,3));
+
+if PROMEDIO < 0.0000001
     break;
 end
    disp(PROMEDIO); 
+   
+   
+       %% Grafica del enjambre
+     
+clf    
+titulo = ['Minimo X: ',num2str(PROMEDIOX),' ','Minimo Y: ' , num2str(PROMEDIOY),' ','Minimo Z: ' , num2str(PROMEDIOZ)];
 
+
+plot3(Current_P(:, 1), Current_P(:, 2), Current_P(:, 3),'o','LineWidth',1,'MarkerSize',9,'MarkerEdgeColor','b','MarkerFaceColor',[0,1,1]); 
+TITULO=title(titulo);
+axis([-10 50 -10 50 -10 50]);
+xlabel('x');
+ylabel('y');
+zlabel('z');
+grid();
+pause(.1);
+
+particula = string((1:Particulas)'); 
+Xt = P(:,1);
+Yt = P(:,2);
+Zt = P(:,3);
+tabla = table( Xt, Yt, Zt)
     
 end 
 
@@ -141,22 +167,74 @@ disp('Posicion final');
 disp(Current_P);
 
 
+%% TRAYECTORIA POR PARTICULA
+P1 = [];P2 = [];P3 = [];P4 = [];P5 = [];
+for n = 1:5:size(P,1)
+
+    P1 = [P1; tabla.Xt(n),tabla.Yt(n),tabla.Zt(n)];
+    P2 = [P2; tabla.Xt(n+1),tabla.Yt(n+1),tabla.Zt(n+1)];
+    P3 = [P3; tabla.Xt(n+2),tabla.Yt(n+2),tabla.Zt(n+2)];
+    P4 = [P4; tabla.Xt(n+3),tabla.Yt(n+3),tabla.Zt(n+3)];
+    P5 = [P5; tabla.Xt(n+4),tabla.Yt(n+4),tabla.Zt(n+4)];
+
+end
+
+
+
+%% Suavizado 25 puntos maximo.
+P1_OP =[]
+p =0;
+sizep= size(P,1)/25;
+sizep = round(sizep);
+contar =0;
+for n=1:sizep:size(P,1)-sizep
+    
+    if contar ==0
+        P1_OP = [P1_OP; P1(1,1),P1(1,2),P1(1,3)];
+    end
+    px = mean([P1(n,1),P1(n+sizep,1)]);
+    py = mean([P1(n,2),P1(n+sizep,2)]);
+    pz = mean([P1(n,3),P1(n+sizep,3)]);
+    
+    P1_OP = [P1_OP; px,py,pz];
+    
+    contar = contar +1;
+    if contar ==25
+        P1_OP = [P1_OP; Current_P(1,1),Current_P(1,2),Current_P(1,3)];
+        break;
+    end
+end
+
+% ME QUEDE EN SUAVIZAR LA SEÑAL
+
+
+%% MAPA TRAYECTORIAS
+close all;
+figure;
+contar =0;
+for m = 1:5:size(tabla,1)-Particulas
+    
+    plot3([P1_OP(m,1);P1_OP(m+Particulas,1)],[P1_OP(m,2);P1_OP(m+Particulas,2)],[P1_OP(m,3);P1_OP(m+Particulas,3)],'k')
+    %plot3([tabla.Xt(m);tabla.Xt(m+Particulas)],[tabla.Yt(m);tabla.Yt(m+Particulas)],[tabla.Zt(m);tabla.Zt(m+Particulas)],'k')
+    hold on;
+    
+end 
+
+plot3(Current_P(1,1),Current_P(1,2),Current_P(1,3),'o','LineWidth',1,'MarkerSize',9,'MarkerEdgeColor','b','MarkerFaceColor',[0,1,1])
+hold on;
+plot3(P1(1,1),P1(1,2),P1(1,3),'o','LineWidth',1,'MarkerSize',9,'MarkerEdgeColor','k','MarkerFaceColor',[1,0,0])
+
+
+xlabel('x')
+ylabel('y')
+zlabel('z')
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+% FALTA HACER QUE LAS TRAYECTORIAS SE VEAN LIMPIAS, SE PUEDE APRECIAR QUE
+% CURRENT_P son la posicion final de las particulas y estamos modelando con
+% la ultima particula.
 
 
 
