@@ -7,32 +7,33 @@ close all;
 
 %% Inicializacion, definicion de parametros y de variables
 % -----------------Limites---------------------------------------------
-limposx=50;
-limposy=50;
-limposz=50;
-limnegx=0;
-limnegy=0;
-limnegz=0;
+limposx=5;
+limposy=5;
+limposz=5;
+limnegx=-5;
+limnegy=-5;
+limnegz=-5;
 %----------------------------------------------------------------------
 x = 0;
 y = 0;
 z = 0;
 %------------------------POSICION OBJETIVO---------------------------------
-XP=15;
-YP=30;
-ZP=50;
+XP=1;
+YP=-2;
+ZP=4;
 %--------------------------------------------------------------------------
 %----------------------funcion objetivo------------------------------------
 Costo = []
 costo = 1*((x-XP)^2)+1*((y-YP)^2)+1*((z-ZP)^2);
 %--------------------------------------------------------------------------
-Particulas = 5; %No particulas.
+Particulas = 100; %No particulas.
 %--------------------Factor de aceleracion--------------------------------- 
-C1 = 2;
-C2 = 2;
-Inertia = 0.5;
+C1 = 2.05;
+C2 = 2.05;
+Inertia = 0.1;
+f_v = 0.02;
 %--------------------------------------------------------------------------
-iteraciones = 100;  %cantidad de iteraciones
+iteraciones = 500;  %cantidad de iteraciones
 %------------------- Inicializamos ----------------------------------------
 % inicializar poblacion
 Poblacion = [];
@@ -44,7 +45,7 @@ end
 P = Poblacion;  % se crea la matriz de todas las posiciones
 % velocidad inicio de cada particula
 V = [];
-V = Poblacion*0.1;
+V = Poblacion*0.0001;
 %--------------------------------------------------------------------------
 Current_P = []; % posicion actual
 Current_P = Poblacion + V;
@@ -80,7 +81,7 @@ vz = 0;
 %         vx = Inertia*V(n,1)+C1*1*(P_Best_pos(n,1)-Current_P(n,1))+C2*1*(P_Best_pos(POS_GB,1)-Current_P(n,1));
 %         vy = Inertia*V(n,2)+C1*1*(P_Best_pos(n,2)-Current_P(n,2))+C2*1*(P_Best_pos(POS_GB,2)-Current_P(n,2));
 %         vz = Inertia*V(n,3)+C1*1*(P_Best_pos(n,3)-Current_P(n,3))+C2*1*(P_Best_pos(POS_GB,3)-Current_P(n,3));
-        V(n,:) = [vx,vy,vz];
+        V(n,:) = f_v*[vx,vy,vz];
     end 
 px = 0;
 py = 0;
@@ -134,7 +135,7 @@ PROMEDIOX= mean(Current_P(:,1));
 PROMEDIOY= mean(Current_P(:,2));
 PROMEDIOZ= mean(Current_P(:,3));
 
-if PROMEDIO < 0.0000001
+if PROMEDIO < 0.1
     break;
 end
    disp(PROMEDIO); 
@@ -148,7 +149,7 @@ titulo = ['Minimo X: ',num2str(PROMEDIOX),' ','Minimo Y: ' , num2str(PROMEDIOY),
 
 plot3(Current_P(:, 1), Current_P(:, 2), Current_P(:, 3),'o','LineWidth',1,'MarkerSize',9,'MarkerEdgeColor','b','MarkerFaceColor',[0,1,1]); 
 TITULO=title(titulo);
-axis([-10 50 -10 50 -10 50]);
+axis([-8 8 -8 8 -8 8]);
 xlabel('x');
 ylabel('y');
 zlabel('z');
@@ -168,42 +169,43 @@ disp(Current_P);
 
 
 %% TRAYECTORIA POR PARTICULA
-P1 = [];P2 = [];P3 = [];P4 = [];P5 = [];
-for n = 1:5:size(P,1)
+ P1 = [];
+%  P2 = [];P3 = [];P4 = [];P5 = [];
+for n = 1:5:size(tabla,1)
 
     P1 = [P1; tabla.Xt(n),tabla.Yt(n),tabla.Zt(n)];
-    P2 = [P2; tabla.Xt(n+1),tabla.Yt(n+1),tabla.Zt(n+1)];
-    P3 = [P3; tabla.Xt(n+2),tabla.Yt(n+2),tabla.Zt(n+2)];
-    P4 = [P4; tabla.Xt(n+3),tabla.Yt(n+3),tabla.Zt(n+3)];
-    P5 = [P5; tabla.Xt(n+4),tabla.Yt(n+4),tabla.Zt(n+4)];
+%     P2 = [P2; tabla.Xt(n+1),tabla.Yt(n+1),tabla.Zt(n+1)];
+%     P3 = [P3; tabla.Xt(n+2),tabla.Yt(n+2),tabla.Zt(n+2)];
+%     P4 = [P4; tabla.Xt(n+3),tabla.Yt(n+3),tabla.Zt(n+3)];
+%     P5 = [P5; tabla.Xt(n+4),tabla.Yt(n+4),tabla.Zt(n+4)];
 
 end
 
 
 
 %% Suavizado 25 puntos maximo.
-P1_OP =[]
-p =0;
-sizep= size(P,1)/25;
-sizep = round(sizep);
-contar =0;
-for n=1:sizep:size(P,1)-sizep
-    
-    if contar ==0
-        P1_OP = [P1_OP; P1(1,1),P1(1,2),P1(1,3)];
-    end
-    px = mean([P1(n,1),P1(n+sizep,1)]);
-    py = mean([P1(n,2),P1(n+sizep,2)]);
-    pz = mean([P1(n,3),P1(n+sizep,3)]);
-    
-    P1_OP = [P1_OP; px,py,pz];
-    
-    contar = contar +1;
-    if contar ==25
-        P1_OP = [P1_OP; Current_P(1,1),Current_P(1,2),Current_P(1,3)];
-        break;
-    end
-end
+% P1_OP =[]
+% p =0;
+% sizep= size(P,1)/25;
+% sizep = round(sizep);
+% contar =0;
+% for n=1:sizep:size(P,1)-sizep
+%     
+%     if contar ==0
+%         P1_OP = [P1_OP; P1(1,1),P1(1,2),P1(1,3)];
+%     end
+%     px = mean([P1(n,1),P1(n+sizep,1)]);
+%     py = mean([P1(n,2),P1(n+sizep,2)]);
+%     pz = mean([P1(n,3),P1(n+sizep,3)]);
+%     
+%     P1_OP = [P1_OP; px,py,pz];
+%     
+%     contar = contar +1;
+%     if contar ==25
+%         P1_OP = [P1_OP; Current_P(1,1),Current_P(1,2),Current_P(1,3)];
+%         break;
+%     end
+% end
 
 % ME QUEDE EN SUAVIZAR LA SEÑAL
 
@@ -212,10 +214,10 @@ end
 close all;
 figure;
 contar =0;
-for m = 1:5:size(tabla,1)-Particulas
+for m = 1:Particulas:size(tabla,1)-Particulas
     
-    plot3([P1_OP(m,1);P1_OP(m+Particulas,1)],[P1_OP(m,2);P1_OP(m+Particulas,2)],[P1_OP(m,3);P1_OP(m+Particulas,3)],'k')
-    %plot3([tabla.Xt(m);tabla.Xt(m+Particulas)],[tabla.Yt(m);tabla.Yt(m+Particulas)],[tabla.Zt(m);tabla.Zt(m+Particulas)],'k')
+    %plot3([P1_OP(m,1);P1_OP(m+Particulas,1)],[P1_OP(m,2);P1_OP(m+Particulas,2)],[P1_OP(m,3);P1_OP(m+Particulas,3)],'k')
+    plot3([tabla.Xt(m);tabla.Xt(m+Particulas)],[tabla.Yt(m);tabla.Yt(m+Particulas)],[tabla.Zt(m);tabla.Zt(m+Particulas)],'k')
     hold on;
     
 end 
@@ -223,7 +225,7 @@ end
 plot3(Current_P(1,1),Current_P(1,2),Current_P(1,3),'o','LineWidth',1,'MarkerSize',9,'MarkerEdgeColor','b','MarkerFaceColor',[0,1,1])
 hold on;
 plot3(P1(1,1),P1(1,2),P1(1,3),'o','LineWidth',1,'MarkerSize',9,'MarkerEdgeColor','k','MarkerFaceColor',[1,0,0])
-
+grid;
 
 xlabel('x')
 ylabel('y')
