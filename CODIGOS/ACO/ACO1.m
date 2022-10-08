@@ -16,12 +16,12 @@ enable    = 1;
 alpha     = 0.7;
 beta      = 1.2;
 rho       = 0.3;
-hormigas  = 700;
+hormigas  = 500;
 iteraciones=2500;
 gamma     = 1;
 Q         = 0.7;
-nodoinit  =3;
-nodofinish=62;
+nodoinit  =1;
+nodofinish=64;
 EVAPORATE = (1-rho);
 death=0;
 %% CREAR GRAFO
@@ -33,6 +33,31 @@ ENDNODES= Datos.EndNodes;
 
 Nodo_actual = nodoinit; 
 Nodo_anterior = 0;
+
+%% -------------------- OBSTACULOS----------------------------------------
+
+OBSTACULO = 1;
+
+switch OBSTACULO
+    
+    case 1
+        obs = 43;
+        
+
+
+end 
+
+
+
+
+
+
+
+
+%-------------------------------------------------------------------------
+
+
+
 for ANT  = 1:1:hormigas
     disp('HORMIGA');
     disp(ANT);
@@ -57,7 +82,8 @@ WINNER = [];
 
 for b = 1:1:size(ENDNODES,1)
 
-                if (ENDNODES(b,1) == Nodo_actual) & (ENDNODES(b,2) ~= Nodo_anterior)  % ver mejor el proximo nodo
+    if (ENDNODES(b,1) ~= obs) & (ENDNODES(b,2) ~= obs)
+                if (ENDNODES(b,1) == Nodo_actual) && (ENDNODES(b,2) ~= Nodo_anterior)   % ver mejor el proximo nodo
                   
    
                             CAMINOS = [CAMINOS; ENDNODES(b,:) ];
@@ -69,7 +95,7 @@ for b = 1:1:size(ENDNODES,1)
 
                 end
 
-                if (ENDNODES(b,2) == Nodo_actual) & (ENDNODES(b,1) ~= Nodo_anterior)
+                if (ENDNODES(b,2) == Nodo_actual) && (ENDNODES(b,1) ~= Nodo_anterior) 
 
 
                             CAMINOS = [CAMINOS; ENDNODES(b,2),ENDNODES(b,1)  ];
@@ -83,8 +109,7 @@ for b = 1:1:size(ENDNODES,1)
                 end
 
 end
-
-
+end 
 
 %% calculando probabilidades
 
@@ -195,7 +220,7 @@ if PESO_TOTAL < OPTIMO
 end
 
 
-% ME QUEDE EN VER LA SIMULACION  
+
 % -------------MOSTRAR TRAYECTORIA-----------------------------------------
 %********************************************
 NODO = [];
@@ -205,7 +230,7 @@ Posiciones_SIMU=[];
 Name_SIMU=[];
 nod = 0;
 
-for n = 1:1:size(TRAYECTORIA_OPTIMA,1)          % evitr poner nodos n
+for n = 1:1:size(TRAYECTORIA_OPTIMA,1)          
     
     if n ~= 1
     for m = 1:1:size(NODO,1)
@@ -232,15 +257,7 @@ for n = 1:1:size(TRAYECTORIA_OPTIMA,1)          % evitr poner nodos n
 end 
 
 NODO = sort(NODO);
-%******************************************
-% ERROR CUANDO NODOS PASAN POR MAS DE UNA VEZ POR EL MISMO NODO ENTONCES
-% SIZE (NODO) > Posiciones = ERROR  SERIA DE VER COMO QUITAR NODOS DE LA
-% MATRIZ DONDE SE PUEDEN ELEGIR// SE ENCONTRO COMO IR QUITANDO ELEMENTOS DE
-% LA MATRIZ PARA EVITAR IR POR NODOS YA ELEGIDOS ( VER DOCUMENTACION)
-%***********************************************************************
 
-% SE DEBE DE UTILIZAR EL TAMAÑO DE LOS NODOS PARA QUE SE PUEDAN REPETIR
-% POSICIONES
 for m = 1:1:size(NODO,1)
 for n = 1:1:size(Posiciones,1) 
     
@@ -251,22 +268,6 @@ end
 end 
 end 
  
-%***************************************    % Probar cla para borrar el grafo anterior.  
-% figure(2);
-%   A = plot(grafosimu, 'XData', grafosimu.Nodes.Xsim+0.5, 'YData', grafosimu.Nodes.Ysim+0.5,'ZData',grafosimu.Nodes.Zsim+0.5, 'NodeColor', 'r' );
-% h = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k' );
- % ENDNODES SIMULACION = TRAYECTORIA_OPTIMA *
-% Weight = *
-% TAO = USAR NO_feromona_POS para jalar el numero de FEROMONA[] *
-% POSICIONES ---> usar NODO para encontrar los datos X Y Z del nodo
-
-% A = plot(G, 'XData', COORDS(:,1)+0.5, 'YData', COORDS(:,2)+0.5,'ZData',COORDS(:,3)+0.5, 'NodeColor', 'r' );
-%-----------------------------------------------------------------------
-
-
-
-
-
 
 
 
@@ -293,10 +294,12 @@ Zsim=Posiciones(:,4);
 EndNodes = TRAYECTORIA_OPTIMA;
 DATASIMU = table(EndNodes,Weight_SIMU, TAO_SIMU);
 POS_SIMU = table(string(Name_SIMU),Xsim, Ysim, Zsim);
-Gsim = graph(DATASIMU, POS_SIMU);                       % saca error de que EndNodes es menor que 64.
+Gsim = graph(DATASIMU, POS_SIMU);                       
 grafosimu = simplify(Gsim);
 figure(2);
 A = plot(grafosimu, 'XData', grafosimu.Nodes.Xsim.X+0.5, 'YData', grafosimu.Nodes.Ysim.Y+0.5,'ZData',grafosimu.Nodes.Zsim.Z+0.5, 'NodeColor', 'k');
+hold on;
+plot3(Posiciones.X(obs)+0.5,Posiciones.Y(obs)+0.5,Posiciones.Z(obs)+0.5,'o','LineWidth',2,'MarkerSize',10,'MarkerEdgeColor','k','MarkerFaceColor',[1,0,0]);
 end
 
 %-------- RESETEAR VARIABLES ---------------
@@ -309,6 +312,3 @@ end
 % ----------------------- fin hormiga ---------------------------------
 
 
-
-% PARA VER SIMULACION PRIMERO SOLUCIONAR ERROR LINEA 201
-% ME QUEDE EN HACER UNA SIMULACION PARA PONER LA TRAYECTORIA OPTIMA
