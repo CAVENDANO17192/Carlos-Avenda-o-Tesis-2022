@@ -13,13 +13,18 @@ OPTIMO= 100000000000000000000000;
 TRAYECTORIA_OPTIMA = [];
 %% ESTABLECIENDO PARAMETROS
 enable    = 1;
-alpha     = 0.7;
-beta      = 1.2;
-rho       = 0.3;
-hormigas  = 500;
+% alpha     = 0.7;
+% beta      = 1.2;
+% rho       = 0.3;
+% Q         = 0.7;
+alpha     = 0.6;
+beta      = 0.5;
+rho       = 0.1;
+Q         = 0.7;
+hormigas  = 200;
 iteraciones=2500;
 gamma     = 1;
-Q         = 0.7;
+
 nodoinit  =1;
 nodofinish=64;
 EVAPORATE = (1-rho);
@@ -34,29 +39,29 @@ ENDNODES= Datos.EndNodes;
 Nodo_actual = nodoinit; 
 Nodo_anterior = 0;
 
+%% TODAS LAS TRAYECTORIAS
+
+figure (1);
+H = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k');
+title('TRAYECTORIA HORMIGA');
+
+
 %% -------------------- OBSTACULOS----------------------------------------
 
 OBSTACULO = 1;
 
 switch OBSTACULO
     
+   
     case 1
         obs = 43;
-        
+    case 2 
+        obs = 0;
 
 
 end 
 
-
-
-
-
-
-
-
 %-------------------------------------------------------------------------
-
-
 
 for ANT  = 1:1:hormigas
     disp('HORMIGA');
@@ -107,7 +112,6 @@ for b = 1:1:size(ENDNODES,1)
 
 
                 end
-
 end
 end 
 
@@ -168,10 +172,6 @@ for n = size(RESULTS.No,1):-1:0
     
 end
 
-% PENDIENTE DE VER SI QUITAR
-%NUMERO_GLOBAL = RESULTS.No_global(WINNER(1));
-%ENDNODES(NUMERO_GLOBAL,:) = [];
-
 %% TRAYECTORIA 
 
 PESO_TRAYECTORIA = [PESO_TRAYECTORIA; RESULTS.PESO(WINNER(1))];
@@ -220,6 +220,35 @@ if PESO_TOTAL < OPTIMO
 end
 
 
+end
+enable = 1;
+
+disp('optimo');
+disp(OPTIMO);
+
+% ------- GUARDAR VARIBALES SIMU----------
+PESO_TRAYECT = [];
+NO_fermon = [];
+PESO_TRAYECT = PESO_TRAYECTORIA;
+NO_fermon = NO_feromona_POS;
+%-------- RESETEAR VARIABLES ---------------
+PESO_TRAYECTORIA = [];
+TRAYECTORIA_HORMIGA = [];
+NO_feromona_POS = [];
+RESULTS = [];
+%-------------------------------------------
+end
+% ----------------------- fin hormiga ---------------------------------
+
+
+
+
+
+
+
+
+
+
 
 % -------------MOSTRAR TRAYECTORIA-----------------------------------------
 %********************************************
@@ -229,6 +258,8 @@ Weight_SIMU=[];
 Posiciones_SIMU=[];
 Name_SIMU=[];
 nod = 0;
+
+
 
 for n = 1:1:size(TRAYECTORIA_OPTIMA,1)          
     
@@ -252,9 +283,10 @@ for n = 1:1:size(TRAYECTORIA_OPTIMA,1)
         NODO = [NODO;nodofinish];  
     end
     
-    TAO_SIMU = [TAO_SIMU; FEROMONA(NO_feromona_POS(n))];
-    Weight_SIMU = [Weight_SIMU;PESO_TRAYECTORIA(n)];
+    TAO_SIMU = [TAO_SIMU; FEROMONA(NO_fermon(n))]; 
+    Weight_SIMU = [Weight_SIMU;PESO_TRAYECT(n)]; 
 end 
+
 
 NODO = sort(NODO);
 
@@ -267,26 +299,9 @@ end
 
 end 
 end 
- 
 
 
-
-end
-enable = 1;
-
-disp('optimo');
-disp(OPTIMO);
-
-figure (1);
-% subplot(1,2,2);
-H = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k');
-title('TRAYECTORIA HORMIGA');
-% subplot(1,2,1);
-% h = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k' );
-% title('TRAYECTORIA OPTIMA');
-
-
-if (ANT == hormigas)
+%------------------------------------------------------------------------
 Name_SIMU = Posiciones.Name;
 Xsim=Posiciones(:,2);
 Ysim=Posiciones(:,3);
@@ -299,16 +314,6 @@ grafosimu = simplify(Gsim);
 figure(2);
 A = plot(grafosimu, 'XData', grafosimu.Nodes.Xsim.X+0.5, 'YData', grafosimu.Nodes.Ysim.Y+0.5,'ZData',grafosimu.Nodes.Zsim.Z+0.5, 'NodeColor', 'k');
 hold on;
+if obs ~= 0
 plot3(Posiciones.X(obs)+0.5,Posiciones.Y(obs)+0.5,Posiciones.Z(obs)+0.5,'o','LineWidth',2,'MarkerSize',10,'MarkerEdgeColor','k','MarkerFaceColor',[1,0,0]);
 end
-
-%-------- RESETEAR VARIABLES ---------------
-PESO_TRAYECTORIA = [];
-TRAYECTORIA_HORMIGA = [];
-NO_feromona_POS = [];
-RESULTS = [];
-%-------------------------------------------
-end
-% ----------------------- fin hormiga ---------------------------------
-
-
