@@ -18,13 +18,13 @@ x = 0;
 y = 0;
 z = 0;
 %------------------------POSICION OBJETIVO---------------------------------
-XP=1;
-YP=-2;
-ZP=4;
+XP=3;
+YP=-4;
+ZP=2;
 %--------------------------------------------------------------------------
 %----------------------funcion objetivo------------------------------------
 Costo = []
-costo = 1*((x-XP)^2)+1*((y-YP)^2)+1*((z-ZP)^2);
+%costo = 1*((x-XP)^2)+1*((y-YP)^2)+1*((z-ZP)^2);
 %--------------------------------------------------------------------------
 Particulas = 100; %No particulas.
 %--------------------Factor de aceleracion--------------------------------- 
@@ -36,12 +36,9 @@ f_v = 0.02;
 iteraciones = 500;  %cantidad de iteraciones
 %------------------- Inicializamos ----------------------------------------
 % inicializar poblacion
-Poblacion = [];
-for n = 1:1:Particulas
-    Poblacion = [Poblacion; randi([limnegx limposx]),randi([limnegy limposy]),randi([limnegz limposz])];
-    %Poblacion = [8,9,1;9,6,1;3,5,10;10,2,10;10,5,8]
-end 
-%Poblacion = [8,9,1;9,6,1;3,5,10;10,2,10;10,5,8]
+
+Poblacion = GENERAR_P(limposx,limposy,limposz,limnegx,limnegy,limnegz,Particulas);
+
 P = Poblacion;  % se crea la matriz de todas las posiciones
 % velocidad inicio de cada particula
 V = [];
@@ -65,12 +62,10 @@ P_Best_pos = Current_P; % posicion de los mejores locales
 %----------------------------fin inicializacion ---------------------------
 
 %--------------- inicio de iteraciones ------------------------------------
-
+tic;
 for iter = 1:1:iteraciones
 %----------                 Actualizacion                   --------------
 % ---------Determinar Velocidad y posicion de cada particula--------------
-
-
 vx = 0;
 vy = 0;
 vz = 0;
@@ -78,9 +73,6 @@ vz = 0;
         vx = Inertia*V(n,1)+C1*rand()*(P_Best_pos(n,1)-Current_P(n,1))+C2*rand()*(P_Best_pos(POS_GB,1)-Current_P(n,1));
         vy = Inertia*V(n,2)+C1*rand()*(P_Best_pos(n,2)-Current_P(n,2))+C2*rand()*(P_Best_pos(POS_GB,2)-Current_P(n,2));
         vz = Inertia*V(n,3)+C1*rand()*(P_Best_pos(n,3)-Current_P(n,3))+C2*rand()*(P_Best_pos(POS_GB,3)-Current_P(n,3));
-%         vx = Inertia*V(n,1)+C1*1*(P_Best_pos(n,1)-Current_P(n,1))+C2*1*(P_Best_pos(POS_GB,1)-Current_P(n,1));
-%         vy = Inertia*V(n,2)+C1*1*(P_Best_pos(n,2)-Current_P(n,2))+C2*1*(P_Best_pos(POS_GB,2)-Current_P(n,2));
-%         vz = Inertia*V(n,3)+C1*1*(P_Best_pos(n,3)-Current_P(n,3))+C2*1*(P_Best_pos(POS_GB,3)-Current_P(n,3));
         V(n,:) = f_v*[vx,vy,vz];
     end 
 px = 0;
@@ -140,80 +132,77 @@ if PROMEDIO < 0.1
 end
    disp(PROMEDIO); 
    
-   
-       %% Grafica del enjambre
-     
-clf    
-titulo = ['Minimo X: ',num2str(PROMEDIOX),' ','Minimo Y: ' , num2str(PROMEDIOY),' ','Minimo Z: ' , num2str(PROMEDIOZ)];
-
-
-plot3(Current_P(:, 1), Current_P(:, 2), Current_P(:, 3),'o','LineWidth',1,'MarkerSize',9,'MarkerEdgeColor','b','MarkerFaceColor',[0,1,1]); 
-TITULO=title(titulo);
-axis([-8 8 -8 8 -8 8]);
-xlabel('x');
-ylabel('y');
-zlabel('z');
-grid();
-pause(.1);
+  
 
 particula = string((1:Particulas)'); 
 Xt = P(:,1);
 Yt = P(:,2);
 Zt = P(:,3);
-tabla = table( Xt, Yt, Zt)
+tabla = table( Xt, Yt, Zt);
     
 end 
+tiempo = toc;
 
-disp('Posicion final');
-disp(Current_P);
+
+%% ANIMACION DEL ENJAMBRE
+figure(1); 
+for n = 0:Particulas:size(P,1)-1
+clf;   
+titulo = ['Minimo X: ',num2str(mean(P((1+n:Particulas+n), 1))),' ','Minimo Y: ' , num2str(mean(P((1+n:Particulas+n), 2))),' ','Minimo Z: ' , num2str(mean(P((1+n:Particulas+n), 3)))];
+plot3(P((1+n:Particulas+n), 1), P((1+n:Particulas+n), 2), P((1+n:Particulas+n), 3),'o','LineWidth',1,'MarkerSize',9,'MarkerEdgeColor','b','MarkerFaceColor',[0,1,1]); 
+TITULO=title(titulo);
+axis([-5 5 -5 5 -5 5]);
+xlabel('x');
+ylabel('y');
+zlabel('z');
+grid();
+drawnow limitrate
+end
+
+% figure(1); clf;
+% fish = plot3(zeros(size(P,1),1),zeros(size(P,1),1),zeros(size(P,1),1));
+% axis([-5 5 -5 5 -5 5]);
+% xlabel('x');
+% ylabel('y');
+% zlabel('z');
+% grid();
+% 
+% for n = 0:Particulas:size(P,1)-1
+%     
+% titulo = ['Minimo X: ',num2str(mean(P((1+n:Particulas+n), 1))),' ','Minimo Y: ' , num2str(mean(P((1+n:Particulas+n), 2))),' ','Minimo Z: ' , num2str(mean(P((1+n:Particulas+n), 3)))];
+% TITULO=title(titulo);
+% 
+%     fish.XData(1+n:Particulas+n) = P((1+n:Particulas+n), 1);
+%     fish.YData(1+n:Particulas+n) = P((1+n:Particulas+n), 2);
+%     fish.ZData(1+n:Particulas+n) = P((1+n:Particulas+n), 3);
+%     drawnow limitrate
+%     
+% end
+
 
 
 %% TRAYECTORIA POR PARTICULA
- P1 = [];
-%  P2 = [];P3 = [];P4 = [];P5 = [];
+ P1 = []; P2 = [];P3 = [];P4 = [];P5 = [];
 for n = 1:5:size(tabla,1)
 
     P1 = [P1; tabla.Xt(n),tabla.Yt(n),tabla.Zt(n)];
-%     P2 = [P2; tabla.Xt(n+1),tabla.Yt(n+1),tabla.Zt(n+1)];
-%     P3 = [P3; tabla.Xt(n+2),tabla.Yt(n+2),tabla.Zt(n+2)];
-%     P4 = [P4; tabla.Xt(n+3),tabla.Yt(n+3),tabla.Zt(n+3)];
-%     P5 = [P5; tabla.Xt(n+4),tabla.Yt(n+4),tabla.Zt(n+4)];
+    P2 = [P2; tabla.Xt(n+1),tabla.Yt(n+1),tabla.Zt(n+1)];
+    P3 = [P3; tabla.Xt(n+2),tabla.Yt(n+2),tabla.Zt(n+2)];
+    P4 = [P4; tabla.Xt(n+3),tabla.Yt(n+3),tabla.Zt(n+3)];
+    P5 = [P5; tabla.Xt(n+4),tabla.Yt(n+4),tabla.Zt(n+4)];
 
 end
 
 
 
 %% Suavizado 25 puntos maximo.
-% P1_OP =[]
-% p =0;
-% sizep= size(P,1)/25;
-% sizep = round(sizep);
-% contar =0;
-% for n=1:sizep:size(P,1)-sizep
-%     
-%     if contar ==0
-%         P1_OP = [P1_OP; P1(1,1),P1(1,2),P1(1,3)];
-%     end
-%     px = mean([P1(n,1),P1(n+sizep,1)]);
-%     py = mean([P1(n,2),P1(n+sizep,2)]);
-%     pz = mean([P1(n,3),P1(n+sizep,3)]);
-%     
-%     P1_OP = [P1_OP; px,py,pz];
-%     
-%     contar = contar +1;
-%     if contar ==25
-%         P1_OP = [P1_OP; Current_P(1,1),Current_P(1,2),Current_P(1,3)];
-%         break;
-%     end
-% end
-
-% ME QUEDE EN SUAVIZAR LA SEÑAL
 
 
 %% MAPA TRAYECTORIAS
 close all;
-figure;
+figure(2);
 contar =0;
+
 for m = 1:Particulas:size(tabla,1)-Particulas
     
     %plot3([P1_OP(m,1);P1_OP(m+Particulas,1)],[P1_OP(m,2);P1_OP(m+Particulas,2)],[P1_OP(m,3);P1_OP(m+Particulas,3)],'k')
@@ -221,6 +210,17 @@ for m = 1:Particulas:size(tabla,1)-Particulas
     hold on;
     
 end 
+% 
+% for n = 0:1:Particulas-1
+% for m = 1:Particulas:size(tabla,1)-Particulas
+%     
+%     %plot3([P1_OP(m,1);P1_OP(m+Particulas,1)],[P1_OP(m,2);P1_OP(m+Particulas,2)],[P1_OP(m,3);P1_OP(m+Particulas,3)],'k')
+%     plot3([tabla.Xt(m+n);tabla.Xt(m+Particulas+n)],[tabla.Yt(m+n);tabla.Yt(m+Particulas+n)],[tabla.Zt(m+n);tabla.Zt(m+Particulas+n)],'k')
+%     hold on;
+%     
+% end 
+% end
+
 
 plot3(Current_P(1,1),Current_P(1,2),Current_P(1,3),'o','LineWidth',1,'MarkerSize',9,'MarkerEdgeColor','b','MarkerFaceColor',[0,1,1])
 hold on;
@@ -230,17 +230,6 @@ grid;
 xlabel('x')
 ylabel('y')
 zlabel('z')
-
-
-
-
-% FALTA HACER QUE LAS TRAYECTORIAS SE VEAN LIMPIAS, SE PUEDE APRECIAR QUE
-% CURRENT_P son la posicion final de las particulas y estamos modelando con
-% la ultima particula.
-
-
-
-
 
 
 
