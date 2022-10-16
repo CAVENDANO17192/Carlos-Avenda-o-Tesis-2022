@@ -1,1 +1,1 @@
-En este folder se encuentra el código del Ant Colony Optimization con la libreria para crear el espacio
+En este folder se encuentra el código del Ant Colony Optimization con la función para crear el espacio
