@@ -27,10 +27,10 @@
 
 #include "../../../controllers/pid_controller.h"
 
-// PUNTO A LLEGAR
-float V0x = 1.28; //X
-float V0y = 1.28; //Y
-float V0z = 1.00;  //Z
+// PUNTO A LLEGAR  (2.56,2.56,2.00) MAXIMOS
+float V0x = 2.56; //X
+float V0y = 2.56; //Y
+float V0z = 2.00;  //Z
 // PARAMETROS PID X
  
 float ukx = 0; float ekx = 0; float edx = 0; 
@@ -221,12 +221,12 @@ int main(int argc, char **argv) {
     Ek_1y = Eky;
     
  
- if (uky > 0.001){
-   uky = 0.1;
+ if (uky > 0.5){
+   uky = 0.5;
  }
  
-  if (uky < -0.001){
-   uky = -0.001;
+  if (uky < -0.5){
+   uky = -0.5;
  }
 
 
@@ -247,12 +247,12 @@ int main(int argc, char **argv) {
     Ek_1x = Ekx;
     
  
- if (ukx > 0.001){
-   uky = 0.001;
+ if (ukx > 0.5){
+   uky = 0.5;
  }
  
-  if (ukx < -0.001){
-   ukx = -0.001;
+  if (ukx < -0.5){
+   ukx = -0.5;
  }
 
 
@@ -274,12 +274,12 @@ int main(int argc, char **argv) {
     Ek_1z = Ekz;
     
  
- if (ukz >0.001){
-   ukz = 0.001;
+ if (ukz >0.005){
+   ukz = 0.005;
  }
  
-  if (ukz < -0.001){
-   ukz = -0.001;
+  if (ukz < -0.005){
+   ukz = -0.005;
  }
 
 
