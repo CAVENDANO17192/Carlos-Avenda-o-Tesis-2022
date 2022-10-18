@@ -27,8 +27,12 @@
 
 #include "../../../controllers/pid_controller.h"
 
+// PUNTO A LLEGAR
+float V0x = 1.28; //X
+float V0y = 1.28; //Y
+float V0z = 1.00;  //Z
 // PARAMETROS PID X
-float V0x = 1.26; float V1x = 0; float V2x = 0;
+ 
 float ukx = 0; float ekx = 0; float edx = 0; 
 float Ekx = 0; float ek_1x=0; float Ek_1x=0;
 float kpx = 0.5; float kix = 0; float kdx =0;
@@ -36,7 +40,7 @@ float deltax = 1/1000;
 float errorx;
 
 // PARAMETROS PID Y
-float V0y = 1.26; float V1y = 0; float V2y = 0;
+
 float uky = 0; float eky = 0; float edy = 0; 
 float Eky = 0; float ek_1y=0; float Ek_1y=0;
 float kpy = 0.25; float kiy = 0; float kdy =0;
@@ -44,7 +48,7 @@ float deltay = 1/1000;
 float errory;
 
 // PARAMETROS PID Z
-float V0z = 1.5; float V1z = 0; float V2z = 0;
+
 float ukz = 0; float ekz = 0; float edz = 0; 
 float Ekz = 0; float ek_1z=0; float Ek_1z=0;
 float kpz = 0.25; float kiz = 0; float kdz =0;
@@ -325,4 +329,3 @@ int main(int argc, char **argv) {
 
   return 0;
 }
-
