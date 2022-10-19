@@ -26,24 +26,44 @@
 #include <webots/distance_sensor.h>
 
 #include "../../../controllers/pid_controller.h"
-float trayectoryx[5];
-float trayectoryy[5];
-float trayectoryz[5];
+float trayectory[]={2.56,0,1,
+0,2.56,1,
+2.56,2.56,1,
+0,0,0
+};
+//float trayectoryx[]={};
+//float trayectoryy[]={};
+//float trayectoryz[]={};
+int point=0;
+int init = 1;
+int aterrizaje = 0;
+int filax =0;
+int filay =1;
+int filaz =2;
+
 // PUNTO A LLEGAR  (2.56,2.56,2.00) MAXIMOS
-float V0x = 2.5; //X
-float V0y = 2.5; //Y
-float V0z = 1.90;  //Z
+float V0x; //X
+float V0y; //Y
+float V0z;  //Z
 
 // PARAMETROS DE INICIO (nodo de inicio)
-int salida = 1;
+
 float initx = 0; //X
 float inity = 0; //Y
 float initz = 0.65;  //Z
+
+// PARAMETROS DE ATERRIZAJE 
+
+float finx1 = 1.28; //X
+float finy1 = 1.28; //Y
+float finz1 = 0.5;  //Z
+
+
 // PARAMETROS PID X
  
 float ukx = 0; float ekx = 0; float edx = 0; 
 float Ekx = 0; float ek_1x=0; float Ek_1x=0;
-float kpx = 0.5; float kix = 0; float kdx =0;
+float kpx = 1; float kix = 0; float kdx =0;
 float deltax = 1/1000;
 float errorx;
 
@@ -51,7 +71,7 @@ float errorx;
 
 float uky = 0; float eky = 0; float edy = 0; 
 float Eky = 0; float ek_1y=0; float Ek_1y=0;
-float kpy = 0.25; float kiy = 0; float kdy =0;
+float kpy = 1; float kiy = 0; float kdy =0;
 float deltay = 1/1000;
 float errory;
 
@@ -59,7 +79,7 @@ float errory;
 
 float ukz = 0; float ekz = 0; float edz = 0; 
 float Ekz = 0; float ek_1z=0; float Ek_1z=0;
-float kpz = 0.25; float kiz = 0; float kdz =0;
+float kpz = 1; float kiz = 0; float kdz =0;
 float deltaz = 1/1000;
 float errorz;
 
@@ -136,8 +156,10 @@ int main(int argc, char **argv) {
 
   printf("Take off!\n");
 
+// leer puntos
+  //lecture();
   while (wb_robot_step(timestep) != -1) {
-
+   
     const double dt = wb_robot_get_time() - past_time;
 
     // Get measurements
@@ -211,121 +233,36 @@ int main(int argc, char **argv) {
       key = wb_keyboard_get_key();
     }
     
-if(salida == 1){
+if (init == 1){
+  V0x=initx;
+  V0y=inity;
+  V0z=initz;
+}    
 
-//--------------- x---------------------
- 
-  ekx = initx - xref;
- errorx = fabs(ekx);
- printf("errorx is %f\n",errorx);
-   
-    edx = eky - ek_1y;
-    Ekx = Ek_1y + eky;
-    ukx = kpx*ekx+kix*Ekx*0.001*+((kdx*edx)/0.001);
-    ek_1x = ekx;
-    Ek_1x = Ekx;
-    
- 
- if (ukx > 0.5){
-   uky = 0.5;
- }
- 
-  if (ukx < -0.5){
-   ukx = -0.5;
- }
-
-
- forwardDesired = forwardDesired + ukx;
-
- // --------------y----------------------
- eky = inity - yref;
- errory = fabs(eky);
- printf("errory is %f\n",errory);
-   
-    edy = eky - ek_1y;
-    Eky = Ek_1x + eky;
-    uky = kpy*eky+kiy*Eky*0.001*+((kdy*edy)/0.001);
-    ek_1y = eky;
-    Ek_1y = Eky;
-    
- 
- if (uky > 0.5){
-   uky = 0.5;
- }
- 
-  if (uky < -0.5){
-   uky = -0.5;
- }
-
-
- sidewaysDesired = sidewaysDesired + uky;
- 
- 
- 
- 
- 
- //-------------------- z--------------------
- 
- 
-  ekz = initz - zref;
- errorz = fabs(ekz);
- printf("errorz is %f\n",errorz);
-  
-    edz = ekz - ek_1z;
-    Ekz = Ek_1z + ekz;
-    ukz = kpz*ekz+kiz*Ekz*0.001*+((kdz*edz)/0.001);
-    ek_1z = ekz;
-    Ek_1z = Ekz;
-    
- 
- if (ukz >0.005){
-   ukz = 0.005;
- }
- 
-  if (ukz < -0.005){
-   ukz = -0.005;
- }
-
-
-  desiredState.altitude =  desiredState.altitude + ukz;
-
-
-
-
-if((errorx<=0.0001)&&(errory<=0.0001)&&(errorz<=0.0001)){
-salida = 0;
+if((point==0)&&(init==0)){
+if(aterrizaje!=1){
+V0x= trayectory[filax];
+V0y= trayectory[filay];
+V0z= trayectory[filaz];
+point=1;
+}
+if ((V0x==0)&&(V0y==0)&&(V0z==0)){
+aterrizaje = 1;
+V0x= finx1;
+V0y= finy1;
+V0z= finz1;
 }
 }    
-    
-    
-if (salida == 0){
+ printf("fila is x = %d y= %d z= %d\n",filax,filay,filaz);
+ printf("point is x =%f y=%f z=%f \n",V0x,V0y,V0z);
+
+
+// ---------------------PID----------------------------    
+if ((point==1)||(init==1)||(aterrizaje==1)){
     
  // ----------SEGUIR COORDENADAS --------------
- // y
- eky = V0y - yref;
- errory = fabs(eky);
- printf("errory is %f\n",errory);
-
-    edy = eky - ek_1y;
-    Eky = Ek_1x + eky;
-    uky = kpy*eky+kiy*Eky*0.001*+((kdy*edy)/0.001);
-    ek_1y = eky;
-    Ek_1y = Eky;
-    
  
- if (uky > 0.5){
-   uky = 0.5;
- }
- 
-  if (uky < -0.5){
-   uky = -0.5;
- }
-
-
- sidewaysDesired = sidewaysDesired + uky;
- 
- 
- // x
+  // x
  
   ekx = V0x - xref;
  errorx = fabs(ekx);
@@ -349,6 +286,28 @@ if (salida == 0){
 
  forwardDesired = forwardDesired + ukx;
  
+ // y
+ eky = V0y - yref;
+ errory = fabs(eky);
+ printf("errory is %f\n",errory);
+
+    edy = eky - ek_1y;
+    Eky = Ek_1x + eky;
+    uky = kpy*eky+kiy*Eky*0.001*+((kdy*edy)/0.001);
+    ek_1y = eky;
+    Ek_1y = Eky;
+    
+ 
+ if (uky > 0.5){
+   uky = 0.5;
+ }
+ 
+  if (uky < -0.5){
+   uky = -0.5;
+ }
+
+
+ sidewaysDesired = sidewaysDesired + uky;
  
  // z
  
@@ -374,6 +333,25 @@ if (salida == 0){
 
 
   desiredState.altitude =  desiredState.altitude + ukz;
+  
+  if((errorx<=0.0001)&&(errory<=0.0001)&&(errorz<=0.0001)){
+if((aterrizaje==0)&(init==0)){
+point = 0;
+filax = filax + 3;
+filay = filay + 3;
+filaz = filaz + 3;
+}
+if (init==1){init=0;}
+
+if (aterrizaje == 1){
+aterrizaje=0;
+init=1;
+point=0;
+filax =0;
+filay =1;
+filaz =2;
+}
+}  
   }
  
  
@@ -420,3 +398,4 @@ if (salida == 0){
 
   return 0;
 }
+
