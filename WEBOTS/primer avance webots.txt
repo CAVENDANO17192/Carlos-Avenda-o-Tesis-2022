@@ -26,11 +26,19 @@
 #include <webots/distance_sensor.h>
 
 #include "../../../controllers/pid_controller.h"
-
+float trayectoryx[5];
+float trayectoryy[5];
+float trayectoryz[5];
 // PUNTO A LLEGAR  (2.56,2.56,2.00) MAXIMOS
-float V0x = 2.56; //X
-float V0y = 2.56; //Y
-float V0z = 2.00;  //Z
+float V0x = 2.5; //X
+float V0y = 2.5; //Y
+float V0z = 1.90;  //Z
+
+// PARAMETROS DE INICIO (nodo de inicio)
+int salida = 1;
+float initx = 0; //X
+float inity = 0; //Y
+float initz = 0.65;  //Z
 // PARAMETROS PID X
  
 float ukx = 0; float ekx = 0; float edx = 0; 
@@ -203,43 +211,14 @@ int main(int argc, char **argv) {
       key = wb_keyboard_get_key();
     }
     
-    
-    
-    
-    
-    // SEGUIR COORDENADAS  PROBANDO CON (1.28,1.28,1.5)--------------
- // y
- eky = V0y - yref;
- errory = fabs(eky);
- printf("errory is %f\n",errory);
-//if (error > 0.01){   
-    eky = V0y - yref;
-    edy = eky - ek_1y;
-    Eky = Ek_1x + eky;
-    uky = kpy*eky+kiy*Eky*0.001*+((kdy*edy)/0.001);
-    ek_1y = eky;
-    Ek_1y = Eky;
-    
- 
- if (uky > 0.5){
-   uky = 0.5;
- }
- 
-  if (uky < -0.5){
-   uky = -0.5;
- }
+if(salida == 1){
 
-
- sidewaysDesired = sidewaysDesired + uky;
- //}
+//--------------- x---------------------
  
- // y
- 
-  ekx = V0x - xref;
+  ekx = initx - xref;
  errorx = fabs(ekx);
  printf("errorx is %f\n",errorx);
-//if (error > 0.01){   
-    ekx = V0x - xref;
+   
     edx = eky - ek_1y;
     Ekx = Ek_1y + eky;
     ukx = kpx*ekx+kix*Ekx*0.001*+((kdx*edx)/0.001);
@@ -257,16 +236,41 @@ int main(int argc, char **argv) {
 
 
  forwardDesired = forwardDesired + ukx;
- //}
+
+ // --------------y----------------------
+ eky = inity - yref;
+ errory = fabs(eky);
+ printf("errory is %f\n",errory);
+   
+    edy = eky - ek_1y;
+    Eky = Ek_1x + eky;
+    uky = kpy*eky+kiy*Eky*0.001*+((kdy*edy)/0.001);
+    ek_1y = eky;
+    Ek_1y = Eky;
+    
  
- // z
+ if (uky > 0.5){
+   uky = 0.5;
+ }
+ 
+  if (uky < -0.5){
+   uky = -0.5;
+ }
+
+
+ sidewaysDesired = sidewaysDesired + uky;
  
  
-  ekz = V0z - zref;
+ 
+ 
+ 
+ //-------------------- z--------------------
+ 
+ 
+  ekz = initz - zref;
  errorz = fabs(ekz);
  printf("errorz is %f\n",errorz);
-//if (error > 0.01){   
-    ekz = V0z - zref;
+  
     edz = ekz - ek_1z;
     Ekz = Ek_1z + ekz;
     ukz = kpz*ekz+kiz*Ekz*0.001*+((kdz*edz)/0.001);
@@ -284,7 +288,94 @@ int main(int argc, char **argv) {
 
 
   desiredState.altitude =  desiredState.altitude + ukz;
- //}
+
+
+
+
+if((errorx<=0.0001)&&(errory<=0.0001)&&(errorz<=0.0001)){
+salida = 0;
+}
+}    
+    
+    
+if (salida == 0){
+    
+ // ----------SEGUIR COORDENADAS --------------
+ // y
+ eky = V0y - yref;
+ errory = fabs(eky);
+ printf("errory is %f\n",errory);
+
+    edy = eky - ek_1y;
+    Eky = Ek_1x + eky;
+    uky = kpy*eky+kiy*Eky*0.001*+((kdy*edy)/0.001);
+    ek_1y = eky;
+    Ek_1y = Eky;
+    
+ 
+ if (uky > 0.5){
+   uky = 0.5;
+ }
+ 
+  if (uky < -0.5){
+   uky = -0.5;
+ }
+
+
+ sidewaysDesired = sidewaysDesired + uky;
+ 
+ 
+ // x
+ 
+  ekx = V0x - xref;
+ errorx = fabs(ekx);
+ printf("errorx is %f\n",errorx);
+
+    edx = eky - ek_1y;
+    Ekx = Ek_1y + eky;
+    ukx = kpx*ekx+kix*Ekx*0.001*+((kdx*edx)/0.001);
+    ek_1x = ekx;
+    Ek_1x = Ekx;
+    
+ 
+ if (ukx > 0.5){
+   uky = 0.5;
+ }
+ 
+  if (ukx < -0.5){
+   ukx = -0.5;
+ }
+
+
+ forwardDesired = forwardDesired + ukx;
+ 
+ 
+ // z
+ 
+ 
+  ekz = V0z - zref;
+ errorz = fabs(ekz);
+ printf("errorz is %f\n",errorz);
+ 
+    edz = ekz - ek_1z;
+    Ekz = Ek_1z + ekz;
+    ukz = kpz*ekz+kiz*Ekz*0.001*+((kdz*edz)/0.001);
+    ek_1z = ekz;
+    Ek_1z = Ekz;
+    
+ 
+ if (ukz >0.005){
+   ukz = 0.005;
+ }
+ 
+  if (ukz < -0.005){
+   ukz = -0.005;
+ }
+
+
+  desiredState.altitude =  desiredState.altitude + ukz;
+  }
+ 
  
     //----------------------------------------------------------------
     
