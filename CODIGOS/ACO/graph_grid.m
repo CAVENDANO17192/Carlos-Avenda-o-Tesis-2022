@@ -4,13 +4,13 @@
 % grid es un número entero mayor a 1. Se genera un grafo de grid x grid
 % La salida es el grafo para implementar el ACO.
 %function [grafo] = graph_grid(grid)
-function [grafo,Datos,Posiciones] = graph_grid(grid)
+function [grafo,Datos,Posiciones] = graph_grid(grid,xmax,ymax,zmax)
 
 %grid = 4
 
-x_lim_pos = grid;
-y_lim_pos = grid;
-z_lim_pos = grid;
+x_lim_pos = xmax;
+y_lim_pos = ymax;
+z_lim_pos = zmax;
 
 x_lim_neg = 1;
 y_lim_neg = 1;
@@ -20,10 +20,11 @@ grid_x = x_lim_pos - x_lim_neg + 1;
 grid_y = y_lim_pos - y_lim_neg + 1;
 grid_z = z_lim_pos - z_lim_neg + 1;
 
-n = grid_x * grid_y * grid_z;
+
+[X1, Y1, Z1] = meshgrid(1:0.5:grid_x, 1:0.5:grid_y, 1:0.3:grid_z); % verificar que genere matrices de 4x4x4 
 
 
-[X1, Y1, Z1] = meshgrid(1:grid_x, 1:grid_y, 1:grid_z);
+n = size(X1,1)*size(Y1,1)*size(Z1,1);
 
 Coords = [reshape(X1, [n, 1]),reshape(Y1, [n, 1]),  reshape(Z1, [n, 1])];
 

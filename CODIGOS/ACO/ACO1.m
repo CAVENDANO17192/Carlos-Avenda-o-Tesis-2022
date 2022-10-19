@@ -20,8 +20,8 @@ enable    = 1;
 alpha     = 0.6;
 beta      = 0.5;
 rho       = 0.1;
-Q         = 0.7;
-hormigas  = 200;
+Q         = 0.5;
+hormigas  = 10;
 iteraciones=2500;
 gamma     = 1;
 
@@ -32,7 +32,10 @@ death=0;
 %% CREAR GRAFO
 
 grid = 4;   % elegir entre 3 y 4
-[G,Datos,Posiciones]=graph_grid(grid);
+[G,Datos,Posiciones]=graph_grid(grid,2.5,2.5,1.90); %(grid,xmax,ymax,zmax) 
+                                                    %verificar que los limites x,y,z generen la misma cantidad de
+                                                    %elementos en reshape
+                                                
 FEROMONA = Datos.Eta;
 ENDNODES= Datos.EndNodes;
 
@@ -317,3 +320,11 @@ hold on;
 if obs ~= 0
 plot3(Posiciones.X(obs)+0.5,Posiciones.Y(obs)+0.5,Posiciones.Z(obs)+0.5,'o','LineWidth',2,'MarkerSize',10,'MarkerEdgeColor','k','MarkerFaceColor',[1,0,0]);
 end
+
+% EXPORTAR DATOS PARA WEBOTS
+% pointx=Posiciones_SIMU(:,1);
+% pointy=Posiciones_SIMU(:,2);
+% pointz=Posiciones_SIMU(:,3);
+% save( 'pointsx', 'pointx')
+% save( 'pointsy', 'pointy')
+% save( 'pointsz', 'pointz')
