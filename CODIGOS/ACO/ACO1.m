@@ -21,7 +21,7 @@ alpha     = 0.6;
 beta      = 0.5;
 rho       = 0.1;
 Q         = 0.5;
-hormigas  = 10;
+hormigas  = 200;
 iteraciones=2500;
 gamma     = 1;
 
@@ -51,7 +51,7 @@ title('TRAYECTORIA HORMIGA');
 
 %% -------------------- OBSTACULOS----------------------------------------
 
-OBSTACULO = 1;
+OBSTACULO = 2;
 
 switch OBSTACULO
     
@@ -321,10 +321,8 @@ if obs ~= 0
 plot3(Posiciones.X(obs)+0.5,Posiciones.Y(obs)+0.5,Posiciones.Z(obs)+0.5,'o','LineWidth',2,'MarkerSize',10,'MarkerEdgeColor','k','MarkerFaceColor',[1,0,0]);
 end
 
-% EXPORTAR DATOS PARA WEBOTS
-% pointx=Posiciones_SIMU(:,1);
-% pointy=Posiciones_SIMU(:,2);
-% pointz=Posiciones_SIMU(:,3);
-% save( 'pointsx', 'pointx')
-% save( 'pointsy', 'pointy')
-% save( 'pointsz', 'pointz')
+
+wb_pc_path = 'D:\------UNIVERSIDAD--------\SEMESTRE 2 AÑO 2022\Diseño e innovacion 2\WEBOTS CRAZYFLIE2.0\crazyflie-simulation-main\webots\controllers\crazyflie_controller';
+
+csvwrite('POINTS.txt', Posiciones_SIMU)
+type POINTS.txt
