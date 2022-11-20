@@ -3,6 +3,10 @@
 % 11/08/2022
 clc
 clear
+
+%% Posicion inicial del dron
+dron = [0;0.2;0.4];
+
 %% INICIALIZACION DE VARIABLES
 PESO_TRAYECTORIA = [];
 TRAYECTORIA_HORMIGA = [];
@@ -25,7 +29,6 @@ hormigas  = 200;
 iteraciones=2500;
 gamma     = 1;
 
-nodoinit  =1;
 nodofinish=64;
 EVAPORATE = (1-rho);
 death=0;
@@ -38,6 +41,8 @@ grid = 4;   % elegir entre 3 y 4
                                                 
 FEROMONA = Datos.Eta;
 ENDNODES= Datos.EndNodes;
+
+[nodoinit] = distancia(Posiciones,dron)
 
 Nodo_actual = nodoinit; 
 Nodo_anterior = 0;
@@ -324,5 +329,5 @@ end
 
 wb_pc_path = 'D:\------UNIVERSIDAD--------\SEMESTRE 2 AÑO 2022\Diseño e innovacion 2\WEBOTS CRAZYFLIE2.0\crazyflie-simulation-main\webots\controllers\crazyflie_controller';
 
-csvwrite('POINTS.txt', Posiciones_SIMU)
-type POINTS.txt
+csvwrite('POINTSACO.txt', Posiciones_SIMU)
+type POINTSACO.txt
