@@ -1,0 +1,438 @@
+/* 
+ *  ...........       ____  _ __
+ *  |  ,-^-,  |      / __ )(_) /_______________ _____  ___
+ *  | (  O  ) |     / __  / / __/ ___/ ___/ __ `/_  / / _ \
+ *  | / ,..´  |    / /_/ / / /_/ /__/ /  / /_/ / / /_/  __/
+ *     +.......   /_____/_/\__/\___/_/   \__,_/ /___/\___/
+ *  
+ * MIT License
+ * 
+ * Copyright (c) 2022 Bitcraze
+ * 
+ * @file crazyflie_controller.c
+ * Controls the crazyflie motors in webots
+ */
+// PRUEBA
+#include <math.h>
+#include <stdio.h>
+
+#include <webots/robot.h>
+#include <webots/motor.h>
+#include <webots/gps.h>
+#include <webots/gyro.h>
+#include <webots/inertial_unit.h>
+#include <webots/keyboard.h>
+#include <webots/camera.h>
+#include <webots/distance_sensor.h>
+
+#include "../../../controllers/pid_controller.h"
+float trayectory[]={0.54, 0.52, 0.76,
+1.03, 0.90, 0.92,
+1.56, 1.17, 1.03,
+2.04, 1.49, 1.15,
+2.32, 1.69, 1.22,
+2.37, 1.65, 1.31,
+2.42, 1.59, 1.34,
+2.50, 1.65, 1.39,
+2.51, 1.64, 1.43,
+2.57, 1.68, 1.47,
+2.51, 1.71, 1.49,
+2.54, 1.70, 1.56,
+2.64, 1.70, 1.65,
+2.59, 1.67, 1.72,
+2.63, 1.71, 1.77,
+2.61, 1.67, 1.82,
+2.54, 1.66, 1.85,
+2.63, 1.69, 1.86,
+2.60, 1.74, 1.87,
+2.58, 1.70, 1.87,
+2.79, 1.71, 1.88,
+3.02, 1.85, 1.86,
+3.15, 1.96, 1.82,
+3.28, 2.11, 1.80,
+3.41, 2.23, 1.77,
+3.48, 2.35, 1.76,
+3.57, 2.44, 1.75,
+3.61, 2.53, 1.73,
+3.68, 2.60, 1.72,
+3.72, 2.66, 1.70,
+3.75, 2.72, 1.70,
+3.79, 2.75, 1.69,
+3.83, 2.79, 1.68,
+3.85, 2.82, 1.68,
+3.87, 2.84, 1.67,
+3.89, 2.87, 1.67,
+3.91, 2.89, 1.67,
+3.92, 2.91, 1.66,
+3.94, 2.92, 1.66,
+0,0,0
+};
+float error_pids=0.1;
+//float trayectoryx[]={};
+//float trayectoryy[]={};
+//float trayectoryz[]={};
+int point=0;
+int init = 1;
+int aterrizaje = 0;
+int filax =0;
+int filay =1;
+int filaz =2;
+
+// PUNTO A LLEGAR  (2.56,2.56,2.00) MAXIMOS
+float V0x; //X
+float V0y; //Y
+float V0z;  //Z
+
+// PARAMETROS DE INICIO (nodo de inicio)
+
+float initx = 0; //X
+float inity = 0; //Y
+float initz = 0.65;  //Z
+
+// PARAMETROS DE ATERRIZAJE 
+
+float finx1 = 1.28; //X
+float finy1 = 1.28; //Y
+float finz1 = 0.5;  //Z
+
+
+// PARAMETROS PID X
+ 
+float ukx = 0; float ekx = 0; float edx = 0; 
+float Ekx = 0; float ek_1x=0; float Ek_1x=0;
+float kpx = 1; float kix = 0; float kdx =0;
+float deltax = 1/1000;
+float errorx;
+
+// PARAMETROS PID Y
+
+float uky = 0; float eky = 0; float edy = 0; 
+float Eky = 0; float ek_1y=0; float Ek_1y=0;
+float kpy = 1; float kiy = 0; float kdy =0;
+float deltay = 1/1000;
+float errory;
+
+// PARAMETROS PID Z
+
+float ukz = 0; float ekz = 0; float edz = 0; 
+float Ekz = 0; float ek_1z=0; float Ek_1z=0;
+float kpz = 1; float kiz = 0; float kdz =0;
+float deltaz = 1/1000;
+float errorz;
+
+float xref = 0;
+float yref = 0;
+float zref = 0;
+int main(int argc, char **argv) {
+  wb_robot_init();
+
+  int timestep = (int)wb_robot_get_basic_time_step();
+
+  // Initialize motors
+  WbDeviceTag m1_motor = wb_robot_get_device("m1_motor");
+  wb_motor_set_position(m1_motor, INFINITY);
+  wb_motor_set_velocity(m1_motor, -1.0);
+  WbDeviceTag m2_motor = wb_robot_get_device("m2_motor");
+  wb_motor_set_position(m2_motor, INFINITY);
+  wb_motor_set_velocity(m2_motor, 1.0);
+  WbDeviceTag m3_motor = wb_robot_get_device("m3_motor");
+  wb_motor_set_position(m3_motor, INFINITY);
+  wb_motor_set_velocity(m3_motor, -1.0);
+  WbDeviceTag m4_motor = wb_robot_get_device("m4_motor");
+  wb_motor_set_position(m4_motor, INFINITY);
+  wb_motor_set_velocity(m4_motor, 1.0);
+
+  // Initialize Sensors
+  WbDeviceTag imu = wb_robot_get_device("inertial unit");
+  wb_inertial_unit_enable(imu, timestep);
+  WbDeviceTag gps = wb_robot_get_device("gps");
+  wb_gps_enable(gps, timestep);
+  wb_keyboard_enable(timestep);
+  WbDeviceTag gyro = wb_robot_get_device("gyro");
+  wb_gyro_enable(gyro, timestep);
+  WbDeviceTag camera = wb_robot_get_device("camera");
+  wb_camera_enable(camera, timestep);
+  WbDeviceTag range_front = wb_robot_get_device("range_front");
+  wb_distance_sensor_enable(range_front, timestep);
+  WbDeviceTag range_left = wb_robot_get_device("range_left");
+  wb_distance_sensor_enable(range_left, timestep);
+  WbDeviceTag range_back = wb_robot_get_device("range_back");
+  wb_distance_sensor_enable(range_back, timestep);
+  WbDeviceTag range_right = wb_robot_get_device("range_right");
+  wb_distance_sensor_enable(range_right, timestep);
+
+
+  // Wait for 2 seconds
+  while (wb_robot_step(timestep) != -1) {
+    if (wb_robot_get_time() > 2.0)
+      break;
+  }
+
+  // Initialize variables
+  ActualState_t actualState = {0};
+  DesiredState_t desiredState = {0};
+  double pastXGlobal =0;
+  double pastYGlobal=0;
+  double past_time = wb_robot_get_time();
+
+  // Initialize PID gains.
+  GainsPID_t gainsPID;
+  gainsPID.kp_att_y = 1;
+  gainsPID.kd_att_y = 0.5;
+  gainsPID.kp_att_rp =0.5;
+  gainsPID.kd_att_rp = 0.1;
+  gainsPID.kp_vel_xy = 2;
+  gainsPID.kd_vel_xy = 0.5;
+  gainsPID.kp_z = 10;
+  gainsPID.ki_z = 50;
+  gainsPID.kd_z = 5;
+  init_pid_attitude_fixed_height_controller();
+  desiredState.altitude = 1.0;
+  // Initialize struct for motor power
+  MotorPower_t motorPower;
+
+  printf("Take off!\n");
+
+// leer puntos
+  //lecture();
+  while (wb_robot_step(timestep) != -1) {
+   
+    const double dt = wb_robot_get_time() - past_time;
+
+    // Get measurements
+    actualState.roll = wb_inertial_unit_get_roll_pitch_yaw(imu)[0];
+   // printf("roll value is %f\n",actualState.roll);
+    actualState.pitch = wb_inertial_unit_get_roll_pitch_yaw(imu)[1];
+   // printf("pitch value is %f\n",actualState.pitch);
+    actualState.yaw_rate = wb_gyro_get_values(gyro)[2];
+   // printf("yaw value is %f\n",actualState.yaw_rate);
+    xref = wb_gps_get_values(gps)[0];
+    printf("x value is %f\n",xref);
+    yref = wb_gps_get_values(gps)[1];
+    printf("y value is %f\n",yref);
+    actualState.altitude = wb_gps_get_values(gps)[2];
+    zref = actualState.altitude;
+    printf("z value is %f\n",actualState.altitude);
+    double xGlobal= wb_gps_get_values(gps)[0];
+    double vxGlobal = (xGlobal - pastXGlobal)/dt;
+    double yGlobal = wb_gps_get_values(gps)[1];
+    double vyGlobal = (yGlobal - pastYGlobal)/dt;
+
+    // Get body fixed velocities
+    double actualYaw = wb_inertial_unit_get_roll_pitch_yaw(imu)[2];
+    double cosyaw = cos(actualYaw);
+    double sinyaw = sin(actualYaw);
+    actualState.vx = vxGlobal * cosyaw + vyGlobal * sinyaw;
+    actualState.vy = - vxGlobal * sinyaw + vyGlobal * cosyaw;
+
+    // Initialize values
+    desiredState.roll = 0;
+    desiredState.pitch = 0;
+    desiredState.vx = 0;
+    desiredState.vy = 0;
+    desiredState.yaw_rate = 0;
+    //desiredState.altitude = 1.0;
+
+    double forwardDesired = 0;
+    double sidewaysDesired = 0;
+    double yawDesired = 0;
+
+    // Control altitude
+    
+    int key = wb_keyboard_get_key();
+    while (key > 0) {
+      switch (key) {
+        case WB_KEYBOARD_UP:
+          forwardDesired = + 0.2;
+          break;
+        case WB_KEYBOARD_DOWN:
+          forwardDesired = - 0.2;
+          break;
+        case WB_KEYBOARD_RIGHT:
+          sidewaysDesired = - 0.2;
+          break;
+        case WB_KEYBOARD_LEFT:
+          sidewaysDesired = + 0.2;
+          break;
+        case 'Q':
+          desiredState.altitude = desiredState.altitude + 0.01;
+          break;
+        case 'E':
+          desiredState.altitude = desiredState.altitude - 0.01;
+          break;
+        case 'R':
+          yawDesired = 0.5;
+          break;
+        case 'T':
+          yawDesired = - 0.5;
+          break;
+        }
+      key = wb_keyboard_get_key();
+    }
+    
+if (init == 1){
+  V0x=initx;
+  V0y=inity;
+  V0z=initz;
+}    
+
+if((point==0)&&(init==0)){
+if(aterrizaje!=1){
+V0x= trayectory[filax];
+V0y= trayectory[filay];
+V0z= trayectory[filaz];
+point=1;
+}
+if ((V0x==0)&&(V0y==0)&&(V0z==0)){
+aterrizaje = 1;
+V0x= finx1;
+V0y= finy1;
+V0z= finz1;
+}
+}    
+ printf("fila is x = %d y= %d z= %d\n",filax,filay,filaz);
+ printf("point is x =%f y=%f z=%f \n",V0x,V0y,V0z);
+
+
+// ---------------------PID----------------------------    
+if ((point==1)||(init==1)||(aterrizaje==1)){
+    
+ // ----------SEGUIR COORDENADAS --------------
+ 
+  // x
+ 
+  ekx = V0x - xref;
+ errorx = fabs(ekx);
+ printf("errorx is %f\n",errorx);
+
+    edx = eky - ek_1y;
+    Ekx = Ek_1y + eky;
+    ukx = kpx*ekx+kix*Ekx*0.001*+((kdx*edx)/0.001);
+    ek_1x = ekx;
+    Ek_1x = Ekx;
+    
+ 
+ if (ukx > 0.5){
+   uky = 0.5;
+ }
+ 
+  if (ukx < -0.5){
+   ukx = -0.5;
+ }
+
+
+ forwardDesired = forwardDesired + ukx;
+ 
+ // y
+ eky = V0y - yref;
+ errory = fabs(eky);
+ printf("errory is %f\n",errory);
+
+    edy = eky - ek_1y;
+    Eky = Ek_1x + eky;
+    uky = kpy*eky+kiy*Eky*0.001*+((kdy*edy)/0.001);
+    ek_1y = eky;
+    Ek_1y = Eky;
+    
+ 
+ if (uky > 0.5){
+   uky = 0.5;
+ }
+ 
+  if (uky < -0.5){
+   uky = -0.5;
+ }
+
+
+ sidewaysDesired = sidewaysDesired + uky;
+ 
+ // z
+ 
+ 
+  ekz = V0z - zref;
+ errorz = fabs(ekz);
+ printf("errorz is %f\n",errorz);
+ 
+    edz = ekz - ek_1z;
+    Ekz = Ek_1z + ekz;
+    ukz = kpz*ekz+kiz*Ekz*0.001*+((kdz*edz)/0.001);
+    ek_1z = ekz;
+    Ek_1z = Ekz;
+    
+ 
+ if (ukz >0.005){
+   ukz = 0.005;
+ }
+ 
+  if (ukz < -0.005){
+   ukz = -0.005;
+ }
+
+
+  desiredState.altitude =  desiredState.altitude + ukz;
+  
+  if((errorx<=error_pids)&&(errory<=error_pids)&&(errorz<=error_pids)){
+if((aterrizaje==0)&(init==0)){
+point = 0;
+filax = filax + 3;
+filay = filay + 3;
+filaz = filaz + 3;
+}
+if (init==1){init=0;}
+
+if (aterrizaje == 1){
+aterrizaje=0;
+init=1;
+point=0;
+filax =0;
+filay =1;
+filaz =2;
+}
+}  
+  }
+ 
+ 
+    //----------------------------------------------------------------
+    
+    
+    
+    
+    
+    // Example how to get sensor data
+    // range_front_value = wb_distance_sensor_get_value(range_front));
+    // const unsigned char *image = wb_camera_get_image(camera);
+
+
+    desiredState.yaw_rate = yawDesired;
+
+    // PID velocity controller with fixed height
+    desiredState.vy = sidewaysDesired;
+    desiredState.vx = forwardDesired;
+    pid_velocity_fixed_height_controller(actualState, &desiredState,
+    gainsPID, dt, &motorPower);
+
+    // PID attitude controller with fixed height
+    /*desiredState.roll = sidewaysDesired;
+    desiredState.pitch = forwardDesired;
+     pid_attitude_fixed_height_controller(actualState, &desiredState,
+    gainsPID, dt, &motorPower);*/
+    
+    // Setting motorspeed
+    wb_motor_set_velocity(m1_motor, - motorPower.m1);
+    wb_motor_set_velocity(m2_motor, motorPower.m2);
+    wb_motor_set_velocity(m3_motor, - motorPower.m3);
+    wb_motor_set_velocity(m4_motor, motorPower.m4);
+    
+    // Save past time for next time step
+    past_time = wb_robot_get_time();
+    pastXGlobal = xGlobal;
+    pastYGlobal = yGlobal;
+
+
+  };
+
+  wb_robot_cleanup();
+
+  return 0;
+}
+
