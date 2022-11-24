@@ -5,14 +5,14 @@ clear;
 close all;
 
 %% posicion inicial del dron
-dron = [0;0;0];
+dron = [0.01;0.15;0.465];
 %desea ver todas las trayectorias? todas = ((si = 1), (no = 0))
 todas= 0;
 %% Inicializacion, definicion de parametros y de variables
 % -----------------Limites---------------------------------------------
-limposx=2.45;
-limposy=2.45;
-limposz=2.0;
+limposx=4;
+limposy=3;
+limposz=1.65;
 limnegx=0;
 limnegy=0;
 limnegz=0.60;
@@ -21,24 +21,24 @@ x = 0;
 y = 0;
 z = 0;
 %------------------------POSICION OBJETIVO---------------------------------
-XP=2.40;
-YP=2.40;
-ZP=2.00;
+XP=4;
+YP=3;
+ZP=1.65;
 %------------------------POSICION OBSTACULO--------------------------------
 Xobs=[];
 Yobs=[];
 Zobs=[];
 nobs=3;
-Xobs=[1.18,1.5,0.5];
-Yobs=[1.18,1.5,0.5];
-Zobs= [1.2,1.5,0.85];
+Xobs=[2.6667,2.6667,2.6667];
+Yobs=[2,2,2];
+Zobs= [0.6,1.00,1.5];
 %-----------------------EVADIR OBSTACULOS----------------------------------
 tol1 = 0.50;
 evadir = 0.01;
 u1x=0;u2x=0;u3x=0;
 u1y=0;u2y=0;u3y=0;
 u1z=0;u2z=0;u3z=0;
-error = 0.01;
+error = 0.0001;
 %--------------------------------------------------------------------------
 Trayectoria_final=[];
 %----------------------funcion objetivo------------------------------------
@@ -295,6 +295,7 @@ zlabel('z')
 
 end
 
+for n = 1:1:size(Trayectoria_final,1)
+    fprintf('%1.2f, %1.2f, %1.2f,\n',Trayectoria_final(n,1),Trayectoria_final(n,2),Trayectoria_final(n,3))
+end 
 
-csvwrite('POINTSPSO.txt', Trayectoria_final)
-type POINTSPSO.txt
