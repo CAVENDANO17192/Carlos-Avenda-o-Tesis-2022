@@ -3,9 +3,9 @@
 % 11/08/2022
 clc
 clear
-
+close all;
 %% Posicion inicial del dron
-dron = [0;0.2;0.4];
+dron = [0.01;0.15;0.465];
 
 %% INICIALIZACION DE VARIABLES
 PESO_TRAYECTORIA = [];
@@ -34,8 +34,8 @@ EVAPORATE = (1-rho);
 death=0;
 %% CREAR GRAFO
 
-grid = 4;   % elegir entre 3 y 4
-[G,Datos,Posiciones]=graph_grid(grid,2.5,2.5,1.90); %(grid,xmax,ymax,zmax) 
+grid = 4;  
+[G,Datos,Posiciones]=graph_grid(grid,4,3,1.65); %(grid,xmax,ymax,zmax) 
                                                     %verificar que los limites x,y,z generen la misma cantidad de
                                                     %elementos en reshape
                                                 
@@ -50,21 +50,27 @@ Nodo_anterior = 0;
 %% TODAS LAS TRAYECTORIAS
 
 figure (1);
-H = plot(G, 'XData', G.Nodes.X+0.5, 'YData', G.Nodes.Y+0.5,'ZData',G.Nodes.Z+0.5, 'NodeColor', 'k');
+H = plot(G, 'XData', G.Nodes.X, 'YData', G.Nodes.Y,'ZData',G.Nodes.Z, 'NodeColor', 'k');
 title('TRAYECTORIA HORMIGA');
 
 
 %% -------------------- OBSTACULOS----------------------------------------
 
-OBSTACULO = 2;
+OBSTACULO = 1;
 
 switch OBSTACULO
     
    
     case 1
-        obs = 43;
+        obs1 = 59;
+        obs2 = 43;
+        obs3 = 27;
+        obs4 = 11;
     case 2 
-        obs = 0;
+        obs1 = 0;
+        obs2 = 0;
+        obs3 = 0;
+        obs4 = 0;
 
 
 end 
@@ -95,7 +101,8 @@ WINNER = [];
 
 for b = 1:1:size(ENDNODES,1)
 
-    if (ENDNODES(b,1) ~= obs) & (ENDNODES(b,2) ~= obs)
+    if (ENDNODES(b,1) ~= obs1) & (ENDNODES(b,2) ~= obs1) & (ENDNODES(b,1) ~= obs2) & (ENDNODES(b,2) ~= obs2)...
+            & (ENDNODES(b,1) ~= obs3) & (ENDNODES(b,2) ~= obs3)& (ENDNODES(b,1) ~= obs4) & (ENDNODES(b,2) ~= obs4)
                 if (ENDNODES(b,1) == Nodo_actual) && (ENDNODES(b,2) ~= Nodo_anterior)   % ver mejor el proximo nodo
                   
    
@@ -320,14 +327,20 @@ POS_SIMU = table(string(Name_SIMU),Xsim, Ysim, Zsim);
 Gsim = graph(DATASIMU, POS_SIMU);                       
 grafosimu = simplify(Gsim);
 figure(2);
-A = plot(grafosimu, 'XData', grafosimu.Nodes.Xsim.X+0.5, 'YData', grafosimu.Nodes.Ysim.Y+0.5,'ZData',grafosimu.Nodes.Zsim.Z+0.5, 'NodeColor', 'k');
+A = plot(grafosimu, 'XData', grafosimu.Nodes.Xsim.X, 'YData', grafosimu.Nodes.Ysim.Y,'ZData',grafosimu.Nodes.Zsim.Z, 'NodeColor', 'k');
 hold on;
-if obs ~= 0
-plot3(Posiciones.X(obs)+0.5,Posiciones.Y(obs)+0.5,Posiciones.Z(obs)+0.5,'o','LineWidth',2,'MarkerSize',10,'MarkerEdgeColor','k','MarkerFaceColor',[1,0,0]);
+if obs1 ~= 0
+plot3(Posiciones.X(obs1),Posiciones.Y(obs1),Posiciones.Z(obs1),'o','LineWidth',2,'MarkerSize',10,'MarkerEdgeColor','k','MarkerFaceColor',[0,1,0]);
+hold on;
+plot3(Posiciones.X(obs2),Posiciones.Y(obs2),Posiciones.Z(obs2),'o','LineWidth',2,'MarkerSize',10,'MarkerEdgeColor','k','MarkerFaceColor',[0,1,0]);
+hold on;
+plot3(Posiciones.X(obs3),Posiciones.Y(obs3),Posiciones.Z(obs3),'o','LineWidth',2,'MarkerSize',10,'MarkerEdgeColor','k','MarkerFaceColor',[0,1,0]);
+hold on;
+plot3(Posiciones.X(obs4),Posiciones.Y(obs4),Posiciones.Z(obs4),'o','LineWidth',2,'MarkerSize',10,'MarkerEdgeColor','k','MarkerFaceColor',[0,1,0]);
 end
 
 
-wb_pc_path = 'D:\------UNIVERSIDAD--------\SEMESTRE 2 AÑO 2022\Diseño e innovacion 2\WEBOTS CRAZYFLIE2.0\crazyflie-simulation-main\webots\controllers\crazyflie_controller';
 
-csvwrite('POINTSACO.txt', Posiciones_SIMU)
-type POINTSACO.txt
+for n = 1:1:size(Posiciones_SIMU,1)
+    fprintf('%1.2f, %1.2f, %1.2f,\n',Posiciones_SIMU(n,1),Posiciones_SIMU(n,2),Posiciones_SIMU(n,3))
+end 
