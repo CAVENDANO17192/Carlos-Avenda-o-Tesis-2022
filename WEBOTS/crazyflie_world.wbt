@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.04007225323145026 0.7056427558718981 0.7074337535108621 0.5952234722166746
-  position -3.121692155976593 -0.7087394785349075 2.6012252938430582
+  orientation 0.12945410664470153 -0.7002827967375079 -0.7020296566857531 5.715877958230974
+  position -5.390826888153464 -1.1635584972383182 4.177213507394354
   follow "Crazyflie"
 }
 TexturedBackground {
@@ -12,57 +12,74 @@ TexturedBackgroundLight {
 }
 Floor {
 }
+Wall {
+  translation 4.08 1.49 0.36
+  rotation -6.97981e-07 -1 -2.39745e-09 1.5708
+  name "wall(5)"
+  size 0.1 3.4 4.2
+}
 Pole {
-  translation 2.68 2.9 0
+  translation 3.64 3.48 0
   name "pole(4)"
 }
 Pole {
-  translation -0.16 2.92 0
-  name "pole(3)"
-}
-Pole {
-  translation 2.68 -0.41 0
-  name "pole(2)"
-}
-Pole {
-  translation 1.26 -0.39 0
+  translation 3.64 -0.48 0
   name "pole(1)"
 }
 Pole {
-  translation 1.26 2.9 0
+  translation 0.1 3.41 0
+  name "pole(3)"
+}
+Pole {
+  translation 0.1 -0.39 0
+  name "pole(6)"
+}
+Pole {
+  translation 1.87 3.47 0
   name "pole(5)"
 }
+Pole {
+  translation 1.87 -0.43 0
+  name "pole(2)"
+}
 ComputerMouse {
-  translation -0.58 0.88 0.5
+  translation -0.49 1.13 0.5
 }
 Table {
-  translation -0.58 1.2 0
+  translation -0.53 1.48 0
   name "table(1)"
   size 0.5 1 0.5
 }
 Wall {
-  translation 1.28 2.77 0
-  rotation 0 0 -0.9999999999999999 1.5707953071795862
-  name "wall(3)"
-  size 0.1 3.2 0.5
-}
-Wall {
-  translation 2.82 1.22 0
+  translation 4.13 1.49 0
   name "wall(2)"
-  size 0.1 3 0.5
+  size 0.1 3.4 0.5
 }
 Wall {
-  translation 1.21 -0.23 0
+  translation -0.19 1.49 0
+  rotation 0 1 0 0
+  name "wall(6)"
+  size 0.1 3.4 0.5
+}
+Wall {
+  translation 1.97 3.24 0
+  rotation 0 0 -0.9999999999999999 1.5707953071795862
+  name "wall(4)"
+  size 0.1 4.4 0.5
+}
+Wall {
+  translation 1.97 -0.23 0
   rotation 0 0 -0.9999999999999999 1.5707953071795862
   name "wall(1)"
-  size 0.1 3.1 0.5
+  size 0.1 4.4 0.5
 }
 Table {
-  translation 1.29 1.27 0
-  size 3 2.9 0.2
+  translation 1.98 1.46 0
+  rotation 0 0 1 1.5708
+  size 3.4 4.2 0.2
 }
 Ball {
-  translation 2.56 0 0.45
+  translation 4 0 0.45
   rotation 0 1 0 0
   name "ball(3)"
 }
@@ -72,7 +89,7 @@ Ball {
   name "ball(2)"
 }
 Robot {
-  translation -0.01 0.23 0.405
+  translation 0.01 0.15 0.465
   children [
     DEF Multiranger Transform {
       translation 0 0 0.02
@@ -310,28 +327,18 @@ Robot {
   controller "crazyflie_controller"
 }
 Ball {
-  translation 0 2.56 0.45
+  translation 0 3 0.45
   rotation 0 1 0 0
 }
 Ball {
-  translation 2.56 2.56 0.45
+  translation 4 3 0.45
   rotation 0 1 0 0
   name "ball(1)"
 }
-Wall {
-  translation -0.27 1.24 0
-  size 0.1 3 0.5
-}
-Wall {
-  translation 1.29 -0.18 0.34
-  rotation 0.5773509358560258 0.577349935856137 0.577349935856137 -2.094395307179586
-  name "wall(4)"
-  size 0.1 3 2.9
-}
 Laptop {
-  translation -0.51 1.24 0.5
+  translation -0.51 1.5 0.5
   rotation 0 0 1 3.14159
 }
-Pole {
-  translation -0.16 -0.4 0
+FloorLight {
+  translation 2.6667 2 0.14
 }
