@@ -58,9 +58,9 @@ El presente repositorio contiene diferentes carpetas para correr el programa de 
   
   ## Antecedentes
 ### [Aldo Aguilar (2019)](https://github.com/AldoAguilarN/MPSO-Algorithm)
-  https://github.com/AldoAguilarN/MPSO-Algorithm
-### Eduardo Santizo (2021)
- https://github.com/larivera-UVG/Inteligencia-Computacional-y-Robotica-Swarm/tree/master/Reinforcement%20y%20Deep%20Learning
-### Daniela Baldizón (2021)
+ 
+### [Eduardo Santizo (2021)](https://github.com/larivera-UVG/Inteligencia-Computacional-y-Robotica-Swarm/tree/master/Reinforcement%20y%20Deep%20Learning)
+ 
+### [Daniela Baldizón (2021)]( https://github.com/larivera-UVG/Inteligencia-Computacional-y-Robotica-Swarm-2021/tree/main/Daniela%20Baldizón)
   
-  https://github.com/larivera-UVG/Inteligencia-Computacional-y-Robotica-Swarm-2021/tree/main/Daniela%20Baldizón
+ 
