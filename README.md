@@ -42,7 +42,7 @@ El presente repositorio contiene diferentes carpetas para correr el programa de 
 
   ## Estructura de carpetas
   
-  #### Índice
+  #### CARPETAS
 
 1. [PSO](#PSO)
 2. [ACO](#ACO)
