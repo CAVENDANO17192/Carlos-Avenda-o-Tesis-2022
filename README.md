@@ -16,11 +16,17 @@ computacional
 
 ## Índice
 
-*[Título e imagen de portada](#Título-e-imagen-de-portada)
-
-*[Insignias](#insignias)
-
-
+1. [Video](#video)
+2. [Estructura de Carpetas](#estructura-de-carpetas)
+3. [Antecedentes](#antecedentes)
+   - [Aldo Aguilar (2019)](#aldo-aguilar-2019)
+   - [Juan Pablo Cahueque (2019)](#juan-pablo-cahueque-2019)
+   - [Eduardo Santizo (2020)](#eduardo-santizo-2020)
+   - [Daniela Baldizon(2021)](#daniela-baldizon-2021)
+4. [Guía de Uso](#guía-de-uso)
+5. [Hardware y Software](#hardware-y-software)
+6. [Swarm Robotics Toolbox](#swarm-robotics-toolbox)
+7. [Pruebas PSO Tuner](#pruebas-pso-tuner)
 
 
 El presente repositorio contiene diferentes carpetas para correr el programa de trabajo de graduación de Carlos Avendaño.
