@@ -4,8 +4,9 @@
 </div>
  
  <div id="header" align= "center">
-  <img src="[https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png](https://user-images.githubusercontent.com/60333304/203880070-ff3b0ce9-767d-4aa1-a07f-12ed39613f86.gif)" width = "300"/>
-   <img src="[https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png](https://user-images.githubusercontent.com/60333304/203880077-4d5e9204-0bd8-4676-a7dd-50117aa5a650.gif)" width = "300"/>
+  <h1 align = "center">  PSO
+  <img src="[https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png](https://user-images.githubusercontent.com/60333304/203880070-ff3b0ce9-767d-4aa1-a07f-12ed39613f86.gif)" width = "500"/>
+
  </div>
 
 
