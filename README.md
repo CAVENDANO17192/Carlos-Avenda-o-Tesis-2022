@@ -1,4 +1,4 @@
-![logo uvg](https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png)\n
+![logo uvg](https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png) ### Prueba
 
 El presente repositorio contiene diferentes carpetas para correr el programa de trabajo de graduación de Carlos Avendaño.
  En estas carpetas van incluidas una llamada ACO que corresponde al Ant Colony Optimization para encontrar trayectorias optimas a diferentes circuitos con
