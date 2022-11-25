@@ -39,16 +39,20 @@ El presente repositorio contiene diferentes carpetas para correr el programa de 
 
 
 
- <div id="video" align= "center">
-  <img src="https://user-images.githubusercontent.com/60333304/203886855-ecd8050e-a8f9-4ea9-a7aa-7ceff568d451.mp4" width = "250"/>
- 
- </div>
-
-
-
-
 
   ## Estructura de carpetas
+  
+  #### Índice
+
+1. [PSO](#PSO)
+2. [ACO](#ACO)
+3. [WEBOTS](#WEBOTS)
+   - [Aldo Aguilar (2019)](#aldo-aguilar-2019)
+   - [Daniela Baldizon (2021)](#daniela-baldizon-2021)
+4. [DOCUMENTACION](#DOCUMENTACION)
+
+  
+  
   ## Antecedentes
 ### Eduardo Santizo (2019)
 ### Daniela Baldizón (2021)
