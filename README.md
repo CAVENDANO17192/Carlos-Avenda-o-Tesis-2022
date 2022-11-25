@@ -19,8 +19,11 @@ computacional
 1. [Video](#video)
 2. [Estructura de Carpetas](#estructura-de-carpetas)
 3. [Antecedentes](#antecedentes)
-   - [Aldo Aguilar (2019)](#aldo-aguilar-2019)
-   - [Daniela Baldizon (2021)](#daniela-baldizon-2021)
+  
+  - [Aldo Aguilar (2019)](#Aldo Aguilar-2019)
+  - [Eduardo Santizo (2021)](#eduardo-santizo-2021)
+  - [Daniela Baldizon (2021)](#daniela-baldizon-2021)
+  
 4. [Guía de Uso](#guía-de-uso)
 5. [Hardware y Software](#hardware-y-software)
 
@@ -54,7 +57,9 @@ El presente repositorio contiene diferentes carpetas para correr el programa de 
   
   
   ## Antecedentes
-### Eduardo Santizo (2019)
+### Aldo Aguilar (2019)
+  https://github.com/AldoAguilarN/MPSO-Algorithm
+### Eduardo Santizo (2021)
  https://github.com/larivera-UVG/Inteligencia-Computacional-y-Robotica-Swarm/tree/master/Reinforcement%20y%20Deep%20Learning
 ### Daniela Baldizón (2021)
   
