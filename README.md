@@ -37,9 +37,12 @@ El presente repositorio contiene diferentes carpetas para correr el programa de 
   Para entender el trabajo de graduación sin necesidad de leer el trabajo escrito te invito a darle click al siguiente video. 😱😛
   
 
-https://user-images.githubusercontent.com/60333304/203886855-ecd8050e-a8f9-4ea9-a7aa-7ceff568d451.mp4
 
 
+ <div id="video" align= "center">
+  <vid src="https://user-images.githubusercontent.com/60333304/203886855-ecd8050e-a8f9-4ea9-a7aa-7ceff568d451.mp4" width = "250"/>
+ 
+ </div>
 
 
 
