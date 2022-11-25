@@ -4,7 +4,7 @@
 </div>
  
  <div id="image" align= "center">
-  <img src="https://user-images.githubusercontent.com/60333304/203880070-ff3b0ce9-767d-4aa1-a07f-12ed39613f86.gif" width = "380"/>
+  <img src="https://user-images.githubusercontent.com/60333304/203880070-ff3b0ce9-767d-4aa1-a07f-12ed39613f86.gif" width = "390"/>
   <img src="https://user-images.githubusercontent.com/60333304/203880292-3d7f9288-9886-48ef-8d4a-efe5c1038b1f.gif" width = "500"/>
  </div>
 
