@@ -19,11 +19,9 @@ computacional
 1. [Video](#video)
 2. [Estructura de Carpetas](#estructura-de-carpetas)
 3. [Antecedentes](#antecedentes)
-  
-  - [Aldo Aguilar (2019)](#aldo-aguilar-2019)
-  - [Eduardo Santizo (2021)](#eduardo-santizo-2021)
-  - [Daniela Baldizón (2021)](#daniela-baldizón-2021)
-  
+   - [Aldo Aguilar (2019)](#aldo-aguilar-2019)
+   - [Eduardo Santizo (2021)](#eduardo-santizo-2021)
+   - [Daniela Baldizón (2021)](#daniela-baldizón-2021)
 4. [Guía de Uso](#guía-de-uso)
 5. [Hardware y Software](#hardware-y-software)
 
