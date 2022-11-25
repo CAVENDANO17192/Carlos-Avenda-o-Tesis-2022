@@ -1,6 +1,8 @@
 <div id="header" align="center">
  <img src="https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png" width = "200"/>
- <h1 align = "center">  Creacion de trayectorias optimas utilizando algoritmos Particle Swarm Optimization y Ant Colony Optimization
+ <h1 align = "center">  Generación de trayectorias automáticas para el dron
+CrazyFlie2.0 utilizando algoritmos de inteligencia
+computacional
 </div>
  
  <div id="image" align= "center">
