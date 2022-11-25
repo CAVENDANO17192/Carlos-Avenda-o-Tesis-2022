@@ -4,3 +4,7 @@ El presente repositorio contiene diferentes carpetas para correr el programa de 
  En la carpeta de Webots se puede encontrar una simulacion con el dron CrazyFlie2.0 donde se validan los algoritmos mostrando como el dron se comporta siguiendo sus
  instrucciones.
  En el folder de documentos se encuentra los pdf's tanto de la tesis como el protocolo de trabajo de graduación.
+
+
+https://user-images.githubusercontent.com/60333304/203876166-96c3f0db-03c5-44f6-afb7-25522fb0028a.mp4
+
