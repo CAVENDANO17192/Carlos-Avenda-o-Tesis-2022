@@ -46,10 +46,8 @@ El presente repositorio contiene diferentes carpetas para correr el programa de 
 
 1. [PSO](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/CODIGOS/PSO)
 2. [ACO](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/CODIGOS/ACO)
-3. [WEBOTS](#WEBOTS)
-   - [Aldo Aguilar (2019)](#aldo-aguilar-2019)
-   - [Daniela Baldizon (2021)](#daniela-baldizon-2021)
-4. [DOCUMENTACION](#DOCUMENTACION)
+3. [WEBOTS](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/WEBOTS)
+4. [DOCUMENTACION](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/DOCUMENTOS)
 
   
   
