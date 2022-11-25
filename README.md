@@ -22,7 +22,7 @@ computacional
    - [Aldo Aguilar (2019)](#aldo-aguilar-2019)
    - [Juan Pablo Cahueque (2019)](#juan-pablo-cahueque-2019)
    - [Eduardo Santizo (2020)](#eduardo-santizo-2020)
-   - [Daniela Baldizon(2021)](#daniela-baldizon-2021)
+   - [Daniela Baldizon (2021)](#daniela-baldizon-2021)
 4. [Guía de Uso](#guía-de-uso)
 5. [Hardware y Software](#hardware-y-software)
 6. [Swarm Robotics Toolbox](#swarm-robotics-toolbox)
@@ -36,5 +36,5 @@ El presente repositorio contiene diferentes carpetas para correr el programa de 
  instrucciones.
  En el folder de documentos se encuentra los pdf's tanto de la tesis como el protocolo de trabajo de graduación.
 
-
+### Juan Pablo Cahueque (2019)
 
