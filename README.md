@@ -40,7 +40,7 @@ El presente repositorio contiene diferentes carpetas para correr el programa de 
 
 
  <div id="video" align= "center">
-  <vid src="https://user-images.githubusercontent.com/60333304/203886855-ecd8050e-a8f9-4ea9-a7aa-7ceff568d451.mp4" width = "250"/>
+  <img src="https://user-images.githubusercontent.com/60333304/203886855-ecd8050e-a8f9-4ea9-a7aa-7ceff568d451.mp4" width = "250"/>
  
  </div>
 
