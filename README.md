@@ -1,7 +1,9 @@
+<div id="header" align="center">
+ <ing src="https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png" width = "200"/>
+ <h1 align = "center"> # Creacion de trayectorias optimas utilizando algoritmos Particle Swarm Optimization y Ant Colony Optimization
+</div>
 
-# Creacion de trayectorias optimas utilizando algoritmos Particle Swarm Optimization y Ant Colony Optimization
-![logo uvg](https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png) 
-![logo uvg](https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png) 
+
 El presente repositorio contiene diferentes carpetas para correr el programa de trabajo de graduación de Carlos Avendaño.
  En estas carpetas van incluidas una llamada ACO que corresponde al Ant Colony Optimization para encontrar trayectorias optimas a diferentes circuitos con
  obstaculos. Una carpeta con el nombre PSO que refiere al Particle swarm optimization para encontrar trayectorias optimas a diferentes circuitos con obstaculos.
