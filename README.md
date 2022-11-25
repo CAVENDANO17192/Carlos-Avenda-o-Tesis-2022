@@ -12,7 +12,7 @@ computacional
  </div>
 
   <div id= "list" align = "center">
-   <h1 align= "center"> pruebita
+   <h3 align= "center"> pruebita
     </div>
 
 
