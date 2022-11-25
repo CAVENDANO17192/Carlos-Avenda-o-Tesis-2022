@@ -45,9 +45,6 @@ El presente repositorio contiene diferentes carpetas para correr el programa de 
   #### CARPETAS
 
 1. [PSO](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/CODIGOS/PSO)
-  
-ejemplo
-  holi
 2. [ACO](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/CODIGOS/ACO)
 3. [WEBOTS](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/WEBOTS)
 4. [OptiTrack](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/OptiTrack)
@@ -58,4 +55,7 @@ ejemplo
   
   ## Antecedentes
 ### Eduardo Santizo (2019)
+ https://github.com/larivera-UVG/Inteligencia-Computacional-y-Robotica-Swarm/tree/master/Reinforcement%20y%20Deep%20Learning
 ### Daniela Baldizón (2021)
+  
+  https://github.com/larivera-UVG/Inteligencia-Computacional-y-Robotica-Swarm-2021/tree/main/Daniela%20Baldizón
