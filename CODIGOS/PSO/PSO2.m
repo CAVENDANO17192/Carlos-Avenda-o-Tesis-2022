@@ -21,9 +21,9 @@ x = 0;
 y = 0;
 z = 0;
 %------------------------POSICION OBJETIVO---------------------------------
-XP=4;
+XP=1;
 YP=3;
-ZP=1.65;
+ZP=1;
 %------------------------POSICION OBSTACULO--------------------------------
 Xobs=[];
 Yobs=[];
@@ -223,15 +223,22 @@ end
 figure(2);
 plot3(0,0,0);
 hold on;
-
-for m = 1:Particulas:size(tabla,1)-Particulas
-    
+%%
+contador = 0;
+for m = 0:Particulas:size(tabla,1)-Particulas
+    m
+    contador = contador+1
     %plot3([P1_OP(m,1);P1_OP(m+Particulas,1)],[P1_OP(m,2);P1_OP(m+Particulas,2)],[P1_OP(m,3);P1_OP(m+Particulas,3)],'k')
-    plot3([tabla.Xt(m-1+VER_PAR);tabla.Xt(m+Particulas-1+VER_PAR)],[tabla.Yt(m-1+VER_PAR);tabla.Yt(m+Particulas-1+VER_PAR)],[tabla.Zt(m-1+VER_PAR);tabla.Zt(m+Particulas-1+VER_PAR)],'k','LineWidth',1)
+    if m ~= size(tabla,1)-Particulas
+    plot3([tabla.Xt(m+VER_PAR);tabla.Xt(m+Particulas+VER_PAR)],[tabla.Yt(m+VER_PAR);tabla.Yt(m+Particulas+VER_PAR)],[tabla.Zt(m+VER_PAR);tabla.Zt(m+Particulas+VER_PAR)],'k','LineWidth',1)
+    else 
+    
+    end
     hold on;
-    Trayectoria_final=[Trayectoria_final;tabla.Xt(m-1+VER_PAR),tabla.Yt(m-1+VER_PAR),tabla.Zt(m-1+VER_PAR)];
-end 
+    Trayectoria_final=[Trayectoria_final;tabla.Xt(m+VER_PAR),tabla.Yt(m+VER_PAR),tabla.Zt(m+VER_PAR)]
 
+end 
+%%
 plot3(Pob(VER_PAR,1),Pob(VER_PAR,2),Pob(VER_PAR,3),'o','LineWidth',1,'MarkerSize',9,'MarkerEdgeColor','b','MarkerFaceColor',[0,1,1])
 hold on;
 plot3(XP,YP,ZP,'o','LineWidth',1,'MarkerSize',15,'MarkerEdgeColor','k','MarkerFaceColor',[1,0,0])
@@ -296,5 +303,5 @@ zlabel('z')
 end
 
 for n = 1:1:size(Trayectoria_final,1)
-    fprintf('%1.2f, %1.2f, %1.2f,\n',Trayectoria_final(n,1),Trayectoria_final(n,2),Trayectoria_final(n,3))
+    fprintf('%1.3f, %1.3f, %1.3f,\n',Trayectoria_final(n,1),Trayectoria_final(n,2),Trayectoria_final(n,3))
 end 
