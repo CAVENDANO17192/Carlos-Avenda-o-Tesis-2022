@@ -13,7 +13,7 @@ TRAYECTORIA_HORMIGA = [];
 NO_feromona_POS = [];
 TRAYECTORIAS = [];
 PASOS = [];
-OPTIMO= 100000000000000000000000;
+OPTIMO= inf;
 TRAYECTORIA_OPTIMA = [];
 %% ESTABLECIENDO PARAMETROS
 enable    = 1;
@@ -25,11 +25,11 @@ alpha     = 0.6;
 beta      = 0.5;
 rho       = 0.1;
 Q         = 0.5;
-hormigas  = 200;
+hormigas  = 500;
 iteraciones=2500;
 gamma     = 1;
 
-nodofinish=64;
+nodofinish=48;
 EVAPORATE = (1-rho);
 death=0;
 %% CREAR GRAFO
@@ -43,7 +43,7 @@ FEROMONA = Datos.Eta;
 ENDNODES= Datos.EndNodes;
 
 [nodoinit] = distancia(Posiciones,dron)
-
+nodoinit=2;
 Nodo_actual = nodoinit; 
 Nodo_anterior = 0;
 
@@ -62,10 +62,10 @@ switch OBSTACULO
     
    
     case 1
-        obs1 = 59;
-        obs2 = 43;
-        obs3 = 27;
-        obs4 = 11;
+        obs1 = 23;
+        obs2 = 26;
+        obs3 = 39;
+        obs4 = 47;
     case 2 
         obs1 = 0;
         obs2 = 0;
