@@ -7,7 +7,7 @@ close all;
 %% posicion inicial del dron
 dron = [0.01;0.15;0.465];
 %desea ver todas las trayectorias? todas = ((si = 1), (no = 0))
-todas= 0;
+todas= 1;
 %% Inicializacion, definicion de parametros y de variables
 % -----------------Limites---------------------------------------------
 limposx=4;
@@ -38,7 +38,7 @@ evadir = 0.01;
 u1x=0;u2x=0;u3x=0;
 u1y=0;u2y=0;u3y=0;
 u1z=0;u2z=0;u3z=0;
-error = 0.0001;
+error = 0.000001;
 %--------------------------------------------------------------------------
 Trayectoria_final=[];
 %----------------------funcion objetivo------------------------------------
@@ -298,4 +298,3 @@ end
 for n = 1:1:size(Trayectoria_final,1)
     fprintf('%1.2f, %1.2f, %1.2f,\n',Trayectoria_final(n,1),Trayectoria_final(n,2),Trayectoria_final(n,3))
 end 
-
