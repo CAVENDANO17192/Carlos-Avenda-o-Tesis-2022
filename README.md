@@ -51,7 +51,7 @@ computacional
  obstaculos. Una carpeta con el nombre PSO que refiere al Particle swarm optimization para encontrar trayectorias optimas a diferentes circuitos con obstaculos.
  En la carpeta de Webots se puede encontrar una simulacion con el dron CrazyFlie2.0 donde se validan los algoritmos mostrando como el dron se comporta siguiendo sus
  instrucciones.
- En el folder de documentos se encuentra los pdf's tanto de la tesis como el protocolo de trabajo de graduación.
+ En el folder de documentos se encuentra los pdf's tanto de la tesis como el protocolo de trabajo de graduación. Y en el folder de OptiTrack se puede encontrar los archivos necesarios para solicitar datos al Robotat desde Matlab de la posición de diferentes markers. 
   
   
   ## Antecedentes
