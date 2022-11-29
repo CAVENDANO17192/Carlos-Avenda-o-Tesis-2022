@@ -1,10 +1,4 @@
-En el presente folder se encuentran los archivos .m de matlab para correr el código de particle swarm optimization. 
-En el archivo PSO2.m se encuentra el 
-En el archivo GENERAR_P se encuentra el .m 
-El archivo Delimitador.m es el encargado de agarrar las trayectorias finales y convertirlas en arrays de maximo 30 puntos por limitaciones de memoria del dron.
-El archivo fitness.m es el 
-El archivo penal.m 
-El archivo distancia.m es el encargado de ver cual particula es la mas cercana al punto inicial del dron para agarrar su trayectoria.
+
 
 1. PSO2
     - Código principal encargado de correr el algoritmo.
