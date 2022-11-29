@@ -1,4 +1,5 @@
 
+### PARTICLE SWARM OPTIMIZATION
 
 1. PSO2
     - Código principal encargado de correr el algoritmo.
@@ -12,3 +13,8 @@
     - Encargado de que si las particulas se acercan demasiado a las particulas de obstaculos las haga esquivarlas.
 6. distancia
     - Encargado de ver cual particula es la mas cercana al punto inicial del dron para agarrar su trayectoria.
+    
+ ## GUIA DE USUARIO
+ 
+ 
+
