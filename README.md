@@ -40,7 +40,7 @@ computacional
 1. [PSO](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/CODIGOS/PSO) :fish: :fish: :fish:
   
   <div id="image" align= "center">
-  <img src="https://user-images.githubusercontent.com/60333304/204427301-023b2da9-f57c-40be-9234-312ff61aaa2d.gif" width = "394"/>
+  <img src="https://user-images.githubusercontent.com/60333304/204427301-023b2da9-f57c-40be-9234-312ff61aaa2d.gif" width = "390"/>
   <img src="https://user-images.githubusercontent.com/60333304/204430110-b248a9df-be55-4e04-bde4-31909eaa53a6.gif" width = "329"/>
   </div>
   
