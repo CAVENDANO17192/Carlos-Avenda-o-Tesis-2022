@@ -26,6 +26,7 @@ computacional
 
 
 
+
   ## Video
   Para entender el trabajo de graduación sin necesidad de leer el trabajo escrito te invito a darle click al siguiente video. 😱😛
   
@@ -60,7 +61,7 @@ computacional
 4. [OptiTrack](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/OptiTrack)
   
   <div id="image" align= "center">
-  <img src="https://user-images.githubusercontent.com/60333304/204432915-feb61651-c4de-4fad-9572-f4952cb51267.JPG" width = "500"/>
+  <img src="https://user-images.githubusercontent.com/60333304/204433210-f201fd32-e5f3-4fc6-8a10-5abc3f4e6824.JPG" width = "500"/>
   </div>
 
  
