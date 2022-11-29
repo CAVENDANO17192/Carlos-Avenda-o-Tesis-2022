@@ -53,6 +53,12 @@ computacional
   </div>
   
 3. [WEBOTS](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/WEBOTS)
+  
+  <div id="image" align= "center">
+  <img src="https://user-images.githubusercontent.com/60333304/204432208-672ce4b2-f260-4fb1-80c3-7616ff66cad2.gif" width = "500"/>
+  </div>
+  
+
 4. [OptiTrack](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/OptiTrack)
 5. [DOCUMENTACION](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/DOCUMENTOS)
 
