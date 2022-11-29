@@ -58,7 +58,13 @@ computacional
   
 
 4. [OptiTrack](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/OptiTrack)
-5. [DOCUMENTACION](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/DOCUMENTOS)
+  
+  <div id="image" align= "center">
+  <img src="https://user-images.githubusercontent.com/60333304/204432208-672ce4b2-f260-4fb1-80c3-7616ff66cad2.gif" width = "500"/>
+  </div>
+  
+5. [DOCUMENTACION](https://user-images.githubusercontent.com/60333304/204432808-1beab1f7-e1be-430c-97f3-fc4d9d6b08f4.JPG)
+
 
   El presente repositorio contiene diferentes carpetas para correr el programa de trabajo de graduación de Carlos Avendaño.
  En estas carpetas van incluidas una llamada ACO que corresponde al Ant Colony Optimization para encontrar trayectorias optimas a diferentes circuitos con
