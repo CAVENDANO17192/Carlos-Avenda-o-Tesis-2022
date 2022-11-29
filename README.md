@@ -42,7 +42,7 @@ computacional
   
   <div id="image" align= "center">
   <img src="https://user-images.githubusercontent.com/60333304/204427301-023b2da9-f57c-40be-9234-312ff61aaa2d.gif" width = "500"/>
-  <img src="https://user-images.githubusercontent.com/60333304/204430110-b248a9df-be55-4e04-bde4-31909eaa53a6.gif" width = "427"/>
+  <img src="https://user-images.githubusercontent.com/60333304/204430110-b248a9df-be55-4e04-bde4-31909eaa53a6.gif" width = "429"/>
   </div>
   
   
