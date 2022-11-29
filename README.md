@@ -65,7 +65,7 @@ computacional
   </div>
 
  
-5. [DOCUMENTACION](https://user-images.githubusercontent.com/60333304/204432808-1beab1f7-e1be-430c-97f3-fc4d9d6b08f4.JPG)  :page_with_curl:
+5. [DOCUMENTACION](https://user-images.githubusercontent.com/60333304/204432808-1beab1f7-e1be-430c-97f3-fc4d9d6b08f4.JPG)  :page_with_curl: :pencil2:
 
 
   El presente repositorio contiene diferentes carpetas para correr el programa de trabajo de graduación de Carlos Avendaño.
