@@ -32,6 +32,7 @@ computacional
   Para entender el trabajo de graduación sin necesidad de leer el trabajo escrito te invito a darle click al siguiente video. 😱😛
   
 
+![PSO](https://user-images.githubusercontent.com/60333304/204427301-023b2da9-f57c-40be-9234-312ff61aaa2d.gif)
 
 
 
@@ -40,6 +41,12 @@ computacional
   #### CARPETAS
 
 1. [PSO](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/CODIGOS/PSO)
+  
+   <div id="image" align= "center">
+  <img src="https://user-images.githubusercontent.com/60333304/204427301-023b2da9-f57c-40be-9234-312ff61aaa2d.gif" width = "500"/>
+  </div>
+  
+  
 2. [ACO](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/CODIGOS/ACO)
   
   <div id="image" align= "center">
