@@ -41,6 +41,10 @@ computacional
   #### CARPETAS
 
 1. [PSO](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/CODIGOS/PSO)
+   <div id="image" align= "center">
+  <img src="https://user-images.githubusercontent.com/60333304/203881069-be0e931b-f758-43d7-9fd0-70e1a3b46b5e.gif" width = "250"/>
+ </div>
+  
 2. [ACO](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/CODIGOS/ACO)
 3. [WEBOTS](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/WEBOTS)
 4. [OptiTrack](https://github.com/CAVENDANO17192/Carlos-Avenda-o-Tesis-2022/tree/main/OptiTrack)
