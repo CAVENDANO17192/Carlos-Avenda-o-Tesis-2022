@@ -1,7 +1,7 @@
 ![Matlab](https://img.shields.io/badge/Matlab-R2018b-orange)
 ![Webots](https://img.shields.io/badge/Webots-R2022a-red)
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com/?font=Righteous&color=016EEA&size=60&center=true&vCenter=true&width=400&height=100&lines=Generación+%F0%9F%91%8B+de+trayectorias+automáticas+para+el+dron+CrazyFlie2.0+utilizando+algoritmos+de+inteligencia+computacional.;I+Am+a+JavaScript+Developer.;Feel+Free+to+Get+in+Touch.+%F0%9F%98%84;Nice+to+Meet+You!!!...)](https://github.com/CodingAce123)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com/?font=Righteous&color=016EEA&size=30&center=true&vCenter=true&width=100&height=100&lines=Generación+%F0%9F%91%8B+de+trayectorias+automáticas+para+el+dron+CrazyFlie2.0+utilizando+algoritmos+de+inteligencia+computacional.)](https://github.com/CodingAce123)
 
 
 <div id="header" align="center">
