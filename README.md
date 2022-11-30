@@ -4,7 +4,7 @@
 
 
  <div id="image" align= "center">
-  <img src="https://user-images.githubusercontent.com/60333304/204702832-59588eca-6ab6-45c9-8b55-762d4a0c9604.png" width = "400"/>
+  <img src="https://user-images.githubusercontent.com/60333304/204702832-59588eca-6ab6-45c9-8b55-762d4a0c9604.png" width = "300"/>
  
  </div>
 
@@ -13,7 +13,6 @@
  <h2 align = "center">  Ant Colony Optimization     &      Particle Swarm Optimization
  </div>
   
-![logo uvg](https://user-images.githubusercontent.com/60333304/204702832-59588eca-6ab6-45c9-8b55-762d4a0c9604.png)
 
  
  <div id="image" align= "center">
