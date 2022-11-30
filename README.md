@@ -2,12 +2,14 @@
 ![Webots](https://img.shields.io/badge/Webots-R2022a-red)
 
 
+ [![Typing SVG](https://readme-typing-svg.demolab.com?font=Alexandria&weight=600&size=50&duration=2000&pause=500&color=25741F&background=FFFFFF&center=true&vCenter=true&multiline=true&width=2000&height=200&lines=Generaci%C3%B3n+de+trayectorias+autom%C3%A1ticas+para+el+dron+CrazyFlie2.0+;utilizando+algoritmos+de+inteligencia+computacional)](https://git.io/typing-svg)
+
 <div id="header" align="center">
  <img src="https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png" width = "200"/>
- <h1 align = "center">  [![Typing SVG](https://readme-typing-svg.demolab.com?font=Alexandria&weight=600&size=50&duration=2000&pause=500&color=25741F&background=FFFFFF&center=true&vCenter=true&multiline=true&width=2000&height=200&lines=Generaci%C3%B3n+de+trayectorias+autom%C3%A1ticas+para+el+dron+CrazyFlie2.0+;utilizando+algoritmos+de+inteligencia+computacional)](https://git.io/typing-svg)
-
   <h2 align = "center">  Ant Colony Optimization     &      Particle Swarm Optimization
 </div>
+ 
+
  
  <div id="image" align= "center">
   <img src="https://user-images.githubusercontent.com/60333304/203881069-be0e931b-f758-43d7-9fd0-70e1a3b46b5e.gif" width = "400"/>
