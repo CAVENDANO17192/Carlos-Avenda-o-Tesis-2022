@@ -20,11 +20,11 @@
  ### GUIA DE USUARIO
  
 1. Descargar los archivos de Matlab y agruparlos en una carpeta 📁
-2. Abrir el archivo PSO2.m siendo este la version 2.0 del algoritmo desarrollado.
-3. Definir la posición inicial del dron en la variable 'dron'. 
-4. Definir los parametros de los limites positivos y negativos de los 3 ejes (x,y,z)
-5. Definir el punto objetivo a donde se quiere que convergan las partículas.
-6. Definir los puntos de los nodos obstáculos. 
-7. Correr el programa 
-8. Recibir resultado en graficas y en el command window los puntos de la trayectoria para webots.
+2. Abrir el archivo PSO2.m siendo este la version 2.0 del algoritmo desarrollado. 🐟
+3. Definir la posición inicial del dron en la variable 'dron'. 🚁
+4. Definir los parametros de los limites positivos y negativos de los 3 ejes (x,y,z) ✔️
+5. Definir el punto objetivo a donde se quiere que convergan las partículas. 👈
+6. Definir los puntos de los nodos obstáculos.  ☑️
+7. Correr el programa 🏃
+8. Recibir resultado en graficas y en el command window los puntos de la trayectoria para webots. 📎
 
