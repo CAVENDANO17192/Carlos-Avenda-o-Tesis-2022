@@ -20,9 +20,9 @@
       - Es la función encargada de generar el grafo con los nodos y aristas del espacio tridimensional donde se haran los cálculos.  
   
  ### GUIA DE USUARIO
-1. Descargar todos los programas y agruparlos en una carpeta :file:
-1. Abrir el programa ACO1.m. 📂
-2. Definir la posición inicial del drone. 🚁
-3. Correr el programa 🏃
-4. Esperar resultados en imagenes y en command windows los puntos para webots ✔️
+1. Descargar todos los programas y agruparlos en una carpeta 📁
+2. Abrir el programa ACO1.m. 📂
+3. Definir la posición inicial del drone. 🚁
+4. Correr el programa 🏃
+5. Esperar resultados en imagenes y en command windows los puntos para webots ✔️
 
