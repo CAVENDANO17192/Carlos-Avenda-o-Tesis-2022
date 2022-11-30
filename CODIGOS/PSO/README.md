@@ -25,4 +25,6 @@
 4. Definir los parametros de los limites positivos y negativos de los 3 ejes (x,y,z)
 5. Definir el punto objetivo a donde se quiere que convergan las partículas.
 6. Definir los puntos de los nodos obstáculos. 
+7. Correr el programa 
+8. Recibir resultado en graficas y en el command window los puntos de la trayectoria para webots.
 
