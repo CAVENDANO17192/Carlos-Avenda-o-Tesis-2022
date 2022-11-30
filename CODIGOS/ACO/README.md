@@ -4,7 +4,7 @@
 # Ant Colony Optimization :ant: :ant: :ant:
 
 <div id="header" align="center">
- <img src="https://user-images.githubusercontent.com/60333304/203876818-7c387308-8f45-4c76-8a62-0c51ac23f6ae.png" width = "200"/>
+<img src="https://user-images.githubusercontent.com/60333304/203881069-be0e931b-f758-43d7-9fd0-70e1a3b46b5e.gif" width = "400"/>
 </div>
 
 
