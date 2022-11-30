@@ -2,10 +2,18 @@
 ![Matlab](https://img.shields.io/badge/Matlab-R2018b-orange)
 ![Webots](https://img.shields.io/badge/Webots-R2022a-red)
 
+
+ <div id="image" align= "center">
+  <img src="https://user-images.githubusercontent.com/60333304/204702832-59588eca-6ab6-45c9-8b55-762d4a0c9604.png" width = "400"/>
+ 
+ </div>
+
  <div id="header" align="center">
  <h1 align = "center">  Generación de trayectorias automáticas para el dron CrazyFlie2.0 utilizando algoritmos de inteligencia computacional
  <h2 align = "center">  Ant Colony Optimization     &      Particle Swarm Optimization
  </div>
+  
+![logo uvg](https://user-images.githubusercontent.com/60333304/204702832-59588eca-6ab6-45c9-8b55-762d4a0c9604.png)
 
  
  <div id="image" align= "center">
