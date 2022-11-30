@@ -1,5 +1,5 @@
 
-### PARTICLE SWARM OPTIMIZATION
+# PARTICLE SWARM OPTIMIZATION
 
 1. PSO2
     - Código principal encargado de correr el algoritmo.
@@ -14,7 +14,11 @@
 6. distancia
     - Encargado de ver cual particula es la mas cercana al punto inicial del dron para agarrar su trayectoria.
     
- # GUIA DE USUARIO
+ ### GUIA DE USUARIO
  
- 
-
+1. Descargar los archivos de Matlab y agruparlos en una carpeta 📁
+2. Abrir el archivo PSO2.m siendo este la version 2.0 del algoritmo desarrollado.
+3. Definir la posición inicial del dron en la variable 'dron'. 
+4. Definir los parametros de los limites positivos y negativos de los 3 ejes (x,y,z)
+5. Definir el punto objetivo a donde se quiere que convergan las partículas.
+6. Definir los puntos de los nodos obstáculos. 
