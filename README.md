@@ -10,7 +10,7 @@
 
  <div id="header" align="center">
  <h1 align = "center">  Generación de trayectorias automáticas para el dron CrazyFlie2.0 utilizando algoritmos de inteligencia computacional
- <h2 align = "center">  Ant Colony Optimization     &      Particle Swarm Optimization
+ <h2 align = "center">  Ant Colony Optimization :ant:    &      Particle Swarm Optimization 🐟
  </div>
   
 
