@@ -21,8 +21,8 @@
   
  ### GUIA DE USUARIO
 
-1. Abrir el programa ACO1.m. 
-2. Definir la posición inicial del drone.
-3. Correr el programa 
-4. esperar resultados en imagenes y en command windows los puntos para webots
+1. Abrir el programa ACO1.m. 📂
+2. Definir la posición inicial del drone. 🚁
+3. Correr el programa 🏃
+4. Esperar resultados en imagenes y en command windows los puntos para webots ✔️
 
