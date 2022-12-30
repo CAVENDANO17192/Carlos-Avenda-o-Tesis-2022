@@ -5,9 +5,9 @@ clear;
 close all;
 
 %% posicion inicial del dron
-dron = [0.01;0.15;0.465];
+dron = [0;2.05;0.465];
 %desea ver todas las trayectorias? todas = ((si = 1), (no = 0))
-todas= 1;
+todas= 0;
 %% Inicializacion, definicion de parametros y de variables
 % -----------------Limites---------------------------------------------
 limposx=4;
@@ -21,9 +21,10 @@ x = 0;
 y = 0;
 z = 0;
 %------------------------POSICION OBJETIVO---------------------------------
-XP=1;
-YP=3;
-ZP=1;
+XP=3.58;
+YP=2.02;
+ZP=1.65;
+PP=[XP;YP;ZP];
 %------------------------POSICION OBSTACULO--------------------------------
 Xobs=[];
 Yobs=[];
@@ -33,12 +34,12 @@ Xobs=[2.6667,2.6667,2.6667];
 Yobs=[2,2,2];
 Zobs= [0.6,1.00,1.5];
 %-----------------------EVADIR OBSTACULOS----------------------------------
-tol1 = 0.50;
+tol1 = 0.5;
 evadir = 0.01;
 u1x=0;u2x=0;u3x=0;
 u1y=0;u2y=0;u3y=0;
 u1z=0;u2z=0;u3z=0;
-error = 0.000001;
+error = 0.0001;
 %--------------------------------------------------------------------------
 Trayectoria_final=[];
 %----------------------funcion objetivo------------------------------------
@@ -52,7 +53,7 @@ C2 = 2.05;
 Inertia = 0.1;
 f_v = 0.02;
 %--------------------------------------------------------------------------
-iteraciones = 100000000000000;  %cantidad de iteraciones
+iteraciones = 1000;  %cantidad de iteraciones
 %------------------- Inicializamos ----------------------------------------
 % inicializar poblacion
 
@@ -226,7 +227,7 @@ hold on;
 %%
 contador = 0;
 for m = 0:Particulas:size(tabla,1)-Particulas
-    m
+    
     contador = contador+1
     %plot3([P1_OP(m,1);P1_OP(m+Particulas,1)],[P1_OP(m,2);P1_OP(m+Particulas,2)],[P1_OP(m,3);P1_OP(m+Particulas,3)],'k')
     if m ~= size(tabla,1)-Particulas
@@ -301,6 +302,12 @@ ylabel('y')
 zlabel('z')
 
 end
+
+% for k = 0:20
+%     view(k,20);
+%     pause(0.05);
+%     
+% end 
 
 for n = 1:1:size(Trayectoria_final,1)
     fprintf('%1.3f, %1.3f, %1.3f,\n',Trayectoria_final(n,1),Trayectoria_final(n,2),Trayectoria_final(n,3))
