@@ -34,7 +34,7 @@
 
 
   ## Video
-  Para entender el trabajo de graduación sin necesidad de leer el trabajo escrito te invito a darle click al siguiente video. 😱😛
+  Si quieres na pequeña explicación del trabajo de graduación y recomendaciones te invito a darle click al siguiente video. 😱😛
   
 
 
