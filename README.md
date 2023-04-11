@@ -35,7 +35,7 @@
 
   ## Video
   Si quieres una pequeña explicación del trabajo de graduación y recomendaciones te invito a darle click al siguiente video. 😱😛
-[![Alt text](https://img.youtube.com/vi/configuroweb/0.jpg)](https://www.youtube.com/watch?v=_RKkAS4Dk_A)
+[![Alt text](https://img.youtube.com/vi/3RFAX3CbSGA/0.jpg)](https://www.youtube.com/watch?v=3RFAX3CbSGA)
 
 
 
