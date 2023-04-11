@@ -34,8 +34,8 @@
 
 
   ## Video
-  Si quieres na pequeña explicación del trabajo de graduación y recomendaciones te invito a darle click al siguiente video. 😱😛
-  
+  Si quieres una pequeña explicación del trabajo de graduación y recomendaciones te invito a darle click al siguiente video. 😱😛
+[![Alt text](https://img.youtube.com/vi/configuroweb/0.jpg)](https://www.youtube.com/watch?v=[configuroweb](https://www.youtube.com/watch?v=_RKkAS4Dk_A))
 
 
 
